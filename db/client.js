@@ -1,6 +1,6 @@
 const { Client } = require("pg");
 
-const dbName = `your-db-name`;
+const dbName = `graceshopper`;
 
 const client = new Client({
   connectionString:
