@@ -45,6 +45,7 @@ async function getAllOrders() {
     const { rows } = await client.query(`
         SELECT * FROM orders; 
         `);
+    return rows;
   } catch (error) {
     throw error;
   }
