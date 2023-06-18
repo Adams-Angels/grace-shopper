@@ -66,23 +66,23 @@ async function updateProduct(id, product) {
     } = await client.query(
       `
       UPDATE products
-      SET name = $1,
-          description = $2,
-          price = $3,
-          image = $4,
-          inventory = $5,
-          category = $6
-      WHERE id = $7
+      SET name = $2,
+          description = $3,
+          price = $4,
+          image = $5,
+          inventory = $6,
+          category = $7
+      WHERE id = $1
       RETURNING *;
     `,
       [
+        id,
         product.name,
         product.description,
         product.price,
         product.image,
         product.inventory,
         product.category,
-        id,
       ]
     );
     console.log("Updated product:", updatedProduct);
@@ -94,9 +94,7 @@ async function updateProduct(id, product) {
 
 async function destroyProduct(id) {
   try {
-    const {
-      rows: [destroyedProduct],
-    } = await client.query(
+    const { rows } = await client.query(
       `
       DELETE FROM products
       WHERE id = $1
@@ -104,8 +102,8 @@ async function destroyProduct(id) {
     `,
       [id]
     );
-    console.log("Destroyed product:", destroyedProduct);
-    return destroyedProduct;
+    console.log("Destroyed product:", rows);
+    return rows;
   } catch (error) {
     throw error;
   }

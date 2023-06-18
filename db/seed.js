@@ -12,6 +12,7 @@ async function dropTables() {
     await client.query(`
     DROP TABLE IF EXISTS users;
     DROP TABLE IF EXISTS orders;
+    DROP TABLE IF EXISTS products;
     `);
   } catch (error) {
     console.error(error);
@@ -35,7 +36,7 @@ async function createTables() {
     );
     CREATE TABLE products (
       id SERIAL PRIMARY KEY,
-      name VARCHAR(255) UNIQUE NOT NULL,
+      name VARCHAR(255) NOT NULL,
       description TEXT,
       price INTEGER,
       image TEXT,
