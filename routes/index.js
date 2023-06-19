@@ -11,7 +11,7 @@ router.use("/users", require(`../db/adapters/users`));
 //GET /api/orders
 router.use("/orders", require(`../db/adapters/order`));
 //GET /api/lineitems
-router.use("/lineitems", require(`../db/adapters/lineitems`));
+router.use("/lineitems", require(`../db/adapters/lineItems`));
 //GET /api/products
 router.use("/products", require(`../db/adapters/products`));
 
