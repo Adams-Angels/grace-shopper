@@ -3,8 +3,9 @@ const client = require("./client");
 const { createUser } = require("./adapters/users");
 const { createOrders } = require("./adapters/order");
 const { createProduct } = require("./adapters/products");
+const { createLineItem } = require("./adapters/lineItems");
 
-const { users, orders, products } = require("./seedData");
+const { users, orders, products, lineItems } = require("./seedData");
 
 async function dropTables() {
   console.log("Dropping tables...");
@@ -13,6 +14,7 @@ async function dropTables() {
     DROP TABLE IF EXISTS users;
     DROP TABLE IF EXISTS orders;
     DROP TABLE IF EXISTS products;
+    DROP TABLE IF EXISTS lineitems;
     `);
   } catch (error) {
     console.error(error);
@@ -34,6 +36,13 @@ async function createTables() {
       totalPrice INTEGER,
       status BOOLEAN DEFAULT FALSE
     );
+    CREATE TABLE lineitems (
+      id SERIAL PRIMARY KEY,
+      quantity INTEGER,
+      order_id INTEGER REFERENCES orders(id),
+      product_id INTEGER REFERENCES products(id),
+      price INTEGER
+    );
     CREATE TABLE products (
       id SERIAL PRIMARY KEY,
       name VARCHAR(255) NOT NULL,
@@ -43,6 +52,8 @@ async function createTables() {
       inventory INTEGER,
       category VARCHAR(255)
     );
+   
+
   `);
   } catch (error) {
     console.log(error);
@@ -62,6 +73,12 @@ async function populateTables() {
       await createOrders(order);
     }
     console.log("...orders created");
+
+    for (const lineItem of lineItems) {
+      console.log("lineItem:", lineItem);
+      await createLineItem(lineItem);
+    }
+    console.log("...lineitems created");
 
     for (const product of products) {
       console.log("products:", product);
