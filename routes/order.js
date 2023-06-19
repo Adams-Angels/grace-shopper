@@ -46,8 +46,12 @@ ordersRouter.patch("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const { user_id, totalPrice, status } = req.body;
-    const updatedOrders = await updateOrders(user_id, totalPrice, status);
-    res.send(updateOrders);
+    const updatedOrders = await updateOrders(id, {
+      user_id,
+      totalPrice,
+      status,
+    });
+    res.send(updatedOrders);
   } catch (error) {
     next(error);
   }
@@ -58,6 +62,7 @@ ordersRouter.delete("/:id", async (res, res, next) => {
   try {
     const { id } = req.params;
     const order = await destroyOrder(id);
+    res.send({ message: "Deleted order!" });
   } catch (error) {
     next(error);
   }
