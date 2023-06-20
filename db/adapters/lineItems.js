@@ -26,8 +26,33 @@ async function getLineItemById(id) {
       rows: [lineItem],
     } = await client.query(
       `
-      SELECT * FROM lineItems
-      WHERE id = $1
+      SELECT 
+      orders.id as id,
+      orders.user_id as user_id,
+      lineitems.quantity as quantity,
+      lineitems.price as price,
+      products.id as product_id,
+      CASE WHEN products.id IS NULL THEN '[]'::json
+      ELSE
+      JSON_AGG(
+        JSON_BUILD_OBJECT (
+          'id', products.id,
+          'name', products.name,
+          'description', products.description,
+          'price', products.price,
+          'image', products.image,
+          'inventory', products.inventory,
+          'category', products.category
+        )
+      ) END AS products
+      
+      FROM orders
+      FULL OUTER JOIN lineitems 
+      ON orders.id = lineitems.order_id
+      FULL OUTER JOIN products
+      ON products.id = lineitems.product_id
+      WHERE products.id =1 
+      GROUP BY lineitems.id, lineitems.order_id, orders.id, products.id
       `,
       [id]
     );
@@ -42,7 +67,33 @@ async function getAllLineItems() {
   try {
     console.log("getting all lineItems");
     const { rows } = await client.query(`
-      SELECT * FROM lineItems;
+    SELECT 
+      orders.id as id,
+      orders.user_id as user_id,
+      lineitems.quantity as quantity,
+      lineitems.price as price,
+      products.id as product_id,
+      CASE WHEN products.id IS NULL THEN '[]'::json
+      ELSE
+      JSON_AGG(
+        JSON_BUILD_OBJECT (
+          'id', products.id,
+          'name', products.name,
+          'description', products.description,
+          'price', products.price,
+          'image', products.image,
+          'inventory', products.inventory,
+          'category', products.category
+        )
+      ) END AS products
+      
+      FROM orders
+      FULL OUTER JOIN lineitems 
+      ON orders.id = lineitems.order_id
+      FULL OUTER JOIN products
+      ON products.id = lineitems.product_id
+      GROUP BY lineitems.id, lineitems.order_id, orders.id, products.id
+      ;
     `);
     console.log("All lineItems:", rows);
     return rows;
