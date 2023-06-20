@@ -36,14 +36,7 @@ async function createTables() {
       totalPrice INTEGER,
       status BOOLEAN DEFAULT FALSE
     );
-    CREATE TABLE lineitems (
-      id SERIAL PRIMARY KEY,
-      quantity INTEGER,
-      order_id INTEGER REFERENCES orders(id),
-      product_id INTEGER REFERENCES products(id),
-      price INTEGER
-    );
-    CREATE TABLE products (
+     CREATE TABLE products (
       id SERIAL PRIMARY KEY,
       name VARCHAR(255) NOT NULL,
       description TEXT,
@@ -52,6 +45,14 @@ async function createTables() {
       inventory INTEGER,
       category VARCHAR(255)
     );
+      CREATE TABLE lineitems (
+      id SERIAL PRIMARY KEY,
+      quantity INTEGER,
+      order_id INTEGER REFERENCES orders(id),
+      product_id INTEGER REFERENCES products(id),
+      price INTEGER
+    );
+   
    
 
   `);
