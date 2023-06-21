@@ -11,10 +11,12 @@ async function dropTables() {
   console.log("Dropping tables...");
   try {
     await client.query(`
-    DROP TABLE IF EXISTS users;
-    DROP TABLE IF EXISTS orders;
+ 
+    
+    DROP TABLE IF EXISTS lineitems;  
     DROP TABLE IF EXISTS products;
-    DROP TABLE IF EXISTS lineitems;
+    DROP TABLE IF EXISTS orders;
+    DROP TABLE IF EXISTS users;
     `);
   } catch (error) {
     console.error(error);
