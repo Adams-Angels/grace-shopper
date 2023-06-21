@@ -20,8 +20,8 @@ ordersRouter.get("/", async (req, res, next) => {
 // api/orders/create-order
 ordersRouter.post("/create-order", async (req, res, next) => {
   try {
-    const { user_id, totalPrice, status } = req.body;
-    const newOrder = await createOrders(user_id, totalPrice, status);
+    const { user_id, status } = req.body;
+    const newOrder = await createOrders(user_id, status);
     res.send(newOrder);
   } catch (error) {
     next(error);
@@ -45,10 +45,9 @@ ordersRouter.get("/:id", async (req, res, next) => {
 ordersRouter.patch("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { user_id, totalPrice, status } = req.body;
+    const { user_id, status } = req.body;
     const updatedOrders = await updateOrders(id, {
       user_id,
-      totalPrice,
       status,
     });
     res.send(updatedOrders);
