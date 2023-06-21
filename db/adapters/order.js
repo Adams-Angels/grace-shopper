@@ -1,17 +1,16 @@
 const client = require("../client");
 
-async function createOrders(user_id, totalPrice, status) {
+async function createOrders(user_id, status) {
   console.log("starting to create order");
   try {
     const {
       rows: [order],
     } = await client.query(
-      ` INSERT INTO orders (user_id, totalPrice, status)
+      ` INSERT INTO orders (user_id, status)
         VALUES ($1, $2, $3)
-        ON CONFLICT (user_id) DO NOTHING 
         RETURNING *; 
         `,
-      [user_id, totalPrice, status]
+      [user_id, status]
     );
     console.log("order from db:", order);
     return order;
@@ -51,7 +50,7 @@ async function getAllOrders() {
   }
 }
 
-async function updateOrders(user_id, totalPrice, status) {
+async function updateOrders(user_id, status) {
   try {
     console.log("updating order");
     const {
@@ -59,11 +58,10 @@ async function updateOrders(user_id, totalPrice, status) {
     } = await client.query(
       `
         UPDATE orders 
-        SET totalPrice = $2 ,
-        SET status = $3
+        SET status = $2
         WHERE id=$1
         `,
-      [user_id, totalPrice, status]
+      [user_id, status]
     );
     return order;
   } catch (error) {
