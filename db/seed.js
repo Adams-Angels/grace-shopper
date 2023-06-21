@@ -30,7 +30,8 @@ async function createTables() {
     CREATE TABLE users(
       id SERIAL PRIMARY KEY,
       username VARCHAR(255) UNIQUE NOT NULL,
-      password VARCHAR(255) NOT NULL
+      password VARCHAR(255) NOT NULL,
+      is_admin BOOLEAN DEFAULT FALSE
     );
     CREATE TABLE orders (
       id SERIAL PRIMARY KEY,
@@ -72,7 +73,7 @@ async function populateTables() {
 
     for (const order of orders) {
       console.log("orders:", order);
-      await createOrders(order);
+      await createOrders(order.user_id, order.status);
     }
     console.log("...orders created");
 
