@@ -35,7 +35,6 @@ async function createTables() {
     CREATE TABLE orders (
       id SERIAL PRIMARY KEY,
       user_id INTEGER REFERENCES users(id),
-      totalPrice INTEGER,
       status BOOLEAN DEFAULT FALSE
     );
      CREATE TABLE products (
@@ -50,8 +49,8 @@ async function createTables() {
       CREATE TABLE lineitems (
       id SERIAL PRIMARY KEY,
       quantity INTEGER,
-      order_id INTEGER REFERENCES orders(id),
-      product_id INTEGER REFERENCES products(id),
+      order_id INTEGER REFERENCES orders(id) NOT NULL,
+      product_id INTEGER REFERENCES products(id) NOT NULL,
       price INTEGER
     );
    
