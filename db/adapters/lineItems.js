@@ -6,7 +6,7 @@ async function createLineItem(quantity, orderId, productId, price) {
     const {
       rows: [createdLineItem],
     } = await client.query(
-      `INSERT INTO lineItems (quantity, order_id, product_id, price)
+      `INSERT INTO lineitems (quantity, order_id, product_id, price)
       VALUES ($1, $2, $3, $4)
       RETURNING *;
       `,
@@ -108,7 +108,7 @@ async function updateLineItem(id, quantity, orderId, productId, price) {
       rows: [updatedlineItem],
     } = await client.query(
       `
-      UPDATE lineItems
+      UPDATE lineitems
       SET quantity = $2,
           order_id = $3,
           product_id = $4,
@@ -129,7 +129,7 @@ async function destroyLineItem(id) {
   try {
     const { rows } = await client.query(
       `
-      DELETE FROM lineItems
+      DELETE FROM lineitems
       WHERE id = $1
       RETURNING *;
       `,
