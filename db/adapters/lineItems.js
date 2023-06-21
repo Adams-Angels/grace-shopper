@@ -27,32 +27,35 @@ async function getLineItemById(id) {
     } = await client.query(
       `
       SELECT 
-      orders.id as id,
-      orders.user_id as user_id,
-      lineitems.quantity as quantity,
-      lineitems.price as price,
-      products.id as product_id,
-      CASE WHEN products.id IS NULL THEN '[]'::json
-      ELSE
-      JSON_AGG(
-        JSON_BUILD_OBJECT (
-          'id', products.id,
-          'name', products.name,
-          'description', products.description,
-          'price', products.price,
-          'image', products.image,
-          'inventory', products.inventory,
-          'category', products.category
-        )
-      ) END AS products
-      
-      FROM orders
-      FULL OUTER JOIN lineitems 
-      ON orders.id = lineitems.order_id
-      FULL OUTER JOIN products
-      ON products.id = lineitems.product_id
-      WHERE products.id =1 
-      GROUP BY lineitems.id, lineitems.order_id, orders.id, products.id
+	
+      JSON_BUILD_OBJECT (
+           'id', orders.id,
+           'status', orders.status,
+           'user_id', orders.user_id,
+           'line_items',
+            COALESCE((
+           
+          
+             SELECT JSON_AGG(
+               JSON_BUILD_OBJECT(
+                 'lineitem_id', lineitems.id ,
+                 'quantity', lineitems.quantity,
+                  'product_id', products.id,
+                  'total_price', lineitems.quantity * lineitems.price,
+                  'product_name', products.name,
+                  'products_img', products.image
+               )
+             )
+             From lineitems
+             left join products
+           on lineitems.product_id = products.id
+           where lineitems.order_id = orders.id
+          ), '[]')
+      )
+    
+    
+    FROM orders
+    WHERE orders.id = $1
       `,
       [id]
     );
@@ -68,31 +71,34 @@ async function getAllLineItems() {
     console.log("getting all lineItems");
     const { rows } = await client.query(`
     SELECT 
-      orders.id as id,
-      orders.user_id as user_id,
-      lineitems.quantity as quantity,
-      lineitems.price as price,
-      products.id as product_id,
-      CASE WHEN products.id IS NULL THEN '[]'::json
-      ELSE
-      JSON_AGG(
-        JSON_BUILD_OBJECT (
-          'id', products.id,
-          'name', products.name,
-          'description', products.description,
-          'price', products.price,
-          'image', products.image,
-          'inventory', products.inventory,
-          'category', products.category
-        )
-      ) END AS products
-      
-      FROM orders
-      FULL OUTER JOIN lineitems 
-      ON orders.id = lineitems.order_id
-      FULL OUTER JOIN products
-      ON products.id = lineitems.product_id
-      GROUP BY lineitems.id, lineitems.order_id, orders.id, products.id
+	
+    JSON_BUILD_OBJECT (
+         'id', orders.id,
+         'status', orders.status,
+         'user_id', orders.user_id,
+         'line_items',
+          COALESCE((
+         
+        
+           SELECT JSON_AGG(
+             JSON_BUILD_OBJECT(
+               'lineitem_id', lineitems.id ,
+               'quantity', lineitems.quantity,
+                'product_id', products.id,
+                'total_price', lineitems.quantity * lineitems.price,
+                'product_name', products.name,
+                'products_img', products.image
+             )
+           )
+           From lineitems
+           left join products
+         on lineitems.product_id = products.id
+         where lineitems.order_id = orders.id
+        ), '[]')
+    )
+  
+  
+  FROM orders
       ;
     `);
     console.log("All lineItems:", rows);
