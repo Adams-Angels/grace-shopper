@@ -79,7 +79,11 @@ async function populateTables() {
 
     for (const lineItem of lineItems) {
       console.log("lineItem:", lineItem);
-      await createLineItem(lineItem);
+      await createLineItem(
+        lineItem.order_id,
+        lineItem.product_id,
+        lineItem.quantity
+      );
     }
     console.log("...lineitems created");
 
