@@ -42,7 +42,7 @@ async function createTables() {
       id SERIAL PRIMARY KEY,
       name VARCHAR(255) NOT NULL,
       description TEXT,
-      price INTEGER,
+      price NUMERIC(10, 2),
       image TEXT,
       inventory INTEGER,
       category VARCHAR(255)
@@ -52,7 +52,7 @@ async function createTables() {
       quantity INTEGER,
       order_id INTEGER REFERENCES orders(id) NOT NULL,
       product_id INTEGER REFERENCES products(id) NOT NULL,
-      price INTEGER
+      price NUMERIC(10, 2)
     );
    
    
@@ -66,32 +66,23 @@ async function createTables() {
 async function populateTables() {
   console.log("Populating tables...");
   try {
-    for (const user of users) {
-      await createUser(user);
-    }
-    console.log("...users created");
-
-    for (const order of orders) {
-      console.log("orders:", order);
-      await createOrders(order.user_id, order.status);
-    }
-    console.log("...orders created");
-
-    for (const lineItem of lineItems) {
-      console.log("lineItem:", lineItem);
-      await createLineItem(
-        lineItem.order_id,
-        lineItem.product_id,
-        lineItem.quantity
-      );
-    }
-    console.log("...lineitems created");
-
-    for (const product of products) {
-      console.log("products:", product);
-      await createProduct(product);
-    }
-    console.log("...products created");
+    await Promise.all([
+      Promise.all(users.map(createUser)),
+      Promise.all(products.map(createProduct)),
+      Promise.all(
+        orders.map((order) => createOrders(order.user_id, order.status))
+      ),
+      Promise.all(
+        lineItems.map((lineItem) =>
+          createLineItem(
+            lineItem.order_id,
+            lineItem.product_id,
+            lineItem.quantity
+          )
+        )
+      ),
+    ]);
+    console.log("...users, products, orders, and line items created");
   } catch (error) {
     console.error(error);
   }
