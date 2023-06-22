@@ -11,8 +11,8 @@ router.use("/users", require("./users"));
 // GET / api / orders;
 router.use("/orders", require(`./order`));
 // //GET /api/lineitems
-// router.use("/lineitems", require(`../db/adapters/lineItems`));
+// router.use("/lineitems", require("./lineitems"));
 // //GET /api/products
-// router.use("/products", require(`../db/adapters/products`));
+router.use("/products", require("./products"));
 router.use("/auth", require("./auth"));
 module.exports = router;

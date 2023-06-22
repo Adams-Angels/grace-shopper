@@ -19,20 +19,19 @@ async function createOrders(user_id, status) {
   }
 }
 
+// if we get error on front end - revisit this function
 async function getOrderById(id) {
   try {
     console.log("get order by id");
-    const {
-      row: [order],
-    } = await client.query(
+    const row = await client.query(
       `
     SELECT * FROM orders 
     WHERE id=$1
     `,
       [id]
     );
-    console.log("order id:,", order);
-    return order;
+    console.log("order id:,");
+    return row.rows;
   } catch (error) {
     throw error;
   }

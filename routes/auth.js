@@ -9,7 +9,7 @@ const { JWT_SECRET } = process.env;
 
 authRouter.post("/register", async (req, res, next) => {
   try {
-    const { username, password } = req.body;
+    const { username, password, is_admin } = req.body;
 
     const _user = await getUserByUsername(username);
     if (_user) {
@@ -22,7 +22,11 @@ authRouter.post("/register", async (req, res, next) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
-    const user = await createUser({ username, password: hashedPassword });
+    const user = await createUser({
+      username,
+      password: hashedPassword,
+      is_admin,
+    });
     delete user.password;
 
     const token = jwt.sign(user, JWT_SECRET);
@@ -88,7 +92,7 @@ authRouter.get("/logout", authRequired, async (req, res, next) => {
       signed: true,
     });
     res.send({
-      success: false,
+      success: true,
       message: "Logged Out!",
     });
   } catch (error) {
