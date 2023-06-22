@@ -1,13 +1,13 @@
 const client = require("../client");
 //left unconstructed to have seperate variables
-async function createProduct(
+async function createProduct({
   name,
   description,
   price,
   image,
   inventory,
-  category
-) {
+  category,
+}) {
   try {
     console.log("Starting to create Products");
     const {
