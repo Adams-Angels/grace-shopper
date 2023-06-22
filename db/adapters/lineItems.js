@@ -1,8 +1,15 @@
 const client = require("../client");
+const { getProductById } = require("./products");
 
 async function createLineItem(quantity, orderId, productId, price) {
   try {
     console.log("Starting to create LineItems");
+    // Check if the product exists
+    const product = await getProductById(productId);
+    if (!product) {
+      throw new Error("Product not found");
+    }
+
     const {
       rows: [createdLineItem],
     } = await client.query(
