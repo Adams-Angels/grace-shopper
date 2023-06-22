@@ -61,6 +61,7 @@ productRouter.patch("/:id", async (req, res, next) => {
   }
 });
 // api/products/:id  admin
+// 3 does not want to get deleted
 productRouter.delete("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
