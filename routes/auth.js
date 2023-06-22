@@ -92,7 +92,7 @@ authRouter.get("/logout", authRequired, async (req, res, next) => {
       signed: true,
     });
     res.send({
-      success: false,
+      success: true,
       message: "Logged Out!",
     });
   } catch (error) {
