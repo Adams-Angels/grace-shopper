@@ -3,7 +3,7 @@ const path = require("path");
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-
+const cookieParser = require("cookie-parser");
 const PORT = process.env.PORT || 3000;
 const server = express();
 
@@ -13,6 +13,8 @@ client.connect();
 server.use(express.json());
 server.use(morgan("dev"));
 server.use(cors());
+server.use(cookieParser(process.env.COOKIE_SECRET));
+//more middleware
 
 // Servers the built React app
 server.use(express.static(path.join(__dirname, "./client", "dist")));
@@ -21,9 +23,9 @@ server.use(express.static(path.join(__dirname, "./client", "dist")));
 server.use("/api", require("./routes"));
 
 // Sends the built React app for all other requests
-server.use((req, res, next) => {
-  res.sendFile(path.join(__dirname, "./client/dist", "index.html"));
-});
+// server.use((req, res, next) => {
+//   res.sendFile(path.join(__dirname, "./client/dist", "index.html"));
+// });
 
 server.use((err, req, res, next) => {
   res.send({

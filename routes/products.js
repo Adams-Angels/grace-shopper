@@ -70,3 +70,4 @@ productRouter.delete("/:id", async (req, res, next) => {
     next(error);
   }
 });
+module.exports = productRouter;

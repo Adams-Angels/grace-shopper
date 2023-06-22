@@ -57,7 +57,7 @@ ordersRouter.patch("/:id", async (req, res, next) => {
 });
 
 // api/orders/id
-ordersRouter.delete("/:id", async (res, res, next) => {
+ordersRouter.delete("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const order = await destroyOrder(id);
