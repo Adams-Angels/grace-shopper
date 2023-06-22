@@ -1,7 +1,7 @@
 const authRouter = require("express").Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { createUser, getUserByUsername } = require("./users");
+const { createUser, getUserByUsername } = require("../db/adapters/users");
 
 const SALT_ROUNDS = 10;
 const { authRequired } = require("./utils");
