@@ -56,3 +56,20 @@ export async function fetchMe() {
     console.log(error);
   }
 }
+export async function logOut() {
+  try {
+    const response = await fetch("/api/auth/logout");
+    const { success, message } = await response.json();
+    if (!success) {
+      throw {
+        message,
+      };
+    }
+    return {
+      success,
+      message,
+    };
+  } catch (error) {
+    console.log(error);
+  }
+}
