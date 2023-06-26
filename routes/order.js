@@ -6,6 +6,7 @@ const {
   destroyOrder,
   updateOrders,
 } = require("../db/adapters/order");
+const { authRequired } = require("./utils");
 
 // api/orders/
 ordersRouter.get("/", async (req, res, next) => {
@@ -45,7 +46,7 @@ ordersRouter.get("/:id", async (req, res, next) => {
 // api/orders/id
 
 //might need some work
-ordersRouter.patch("/:id", async (req, res, next) => {
+ordersRouter.patch("/:id", authRequired, async (req, res, next) => {
   try {
     const { id } = req.params;
     const { user_id, status } = req.body;
@@ -61,7 +62,7 @@ ordersRouter.patch("/:id", async (req, res, next) => {
 
 // api/orders/id
 //this one works!! -
-ordersRouter.delete("/:id", async (req, res, next) => {
+ordersRouter.delete("/:id", authRequired, async (req, res, next) => {
   try {
     const { id } = req.params;
     const order = await destroyOrder(id);
