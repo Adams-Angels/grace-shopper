@@ -30,7 +30,7 @@ ordersRouter.post("/create-order", async (req, res, next) => {
 });
 
 // api/orders/id
-//id does not work for orders
+
 ordersRouter.get("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -45,7 +45,6 @@ ordersRouter.get("/:id", async (req, res, next) => {
 
 // api/orders/id
 
-//might need some work
 ordersRouter.patch("/:id", authRequired, async (req, res, next) => {
   try {
     const { id } = req.params;
