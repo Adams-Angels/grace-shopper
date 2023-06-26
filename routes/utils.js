@@ -15,4 +15,17 @@ const authRequired = (req, res, next) => {
   next();
 };
 
-module.exports = { authRequired };
+const checkAdmin = (req, res, next) => {
+  try {
+    const { user } = req;
+    if (user.is_admin) {
+      next();
+    }
+  } catch (error) {
+    res.status(403).json({
+      error: "Unauthorized",
+    });
+  }
+};
+
+module.exports = { authRequired, checkAdmin };

@@ -25,7 +25,7 @@ lineItemRouter.get("/:id", async (req, res, next) => {
     next(error);
   }
 });
-// this may need some work
+
 lineItemRouter.post("/", async (req, res, next) => {
   try {
     const { quantity, orderId, productId, price } = req.body;
