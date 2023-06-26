@@ -1,7 +1,28 @@
 const users = [
-  { username: "user1", password: "password1" },
-  { username: "user2", password: "password2" },
-  { username: "user3", password: "password3" },
+  {
+    username: "Angels",
+    password: "angels",
+    email: "angels@gmail.com",
+    is_admin: "true",
+  },
+  {
+    username: "user1",
+    password: "password1",
+    email: "user1@gmail.com",
+    is_admin: "false",
+  },
+  {
+    username: "user2",
+    password: "password2",
+    email: "user2@gmail.com",
+    is_admin: "false",
+  },
+  {
+    username: "user3",
+    password: "password3",
+    email: "user3@gmail.com",
+    is_admin: "false",
+  },
 ];
 // I'm not sure how to get to the direct image?
 // maybe like 'https://google.com/frog_figurine1.jpeg'
