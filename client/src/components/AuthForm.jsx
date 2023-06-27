@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { registerUser, loginUser } from "../../../api/auth";
+import { registerUser, loginUser } from "../api/auth";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export default function AuthForm() {
