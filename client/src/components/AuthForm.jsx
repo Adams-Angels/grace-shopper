@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { registerUser, loginUser } from "../api/auth";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 
-export default function AuthForm() {
+export function AuthForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
