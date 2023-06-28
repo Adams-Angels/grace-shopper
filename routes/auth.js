@@ -9,7 +9,7 @@ const { JWT_SECRET } = process.env;
 
 authRouter.post("/register", async (req, res, next) => {
   try {
-    const { username, password, is_admin } = req.body;
+    const { username, password, email, is_admin } = req.body;
 
     const _user = await getUserByUsername(username);
     if (_user) {
@@ -25,6 +25,7 @@ authRouter.post("/register", async (req, res, next) => {
     const user = await createUser({
       username,
       password: hashedPassword,
+      email,
       is_admin,
     });
     delete user.password;
@@ -49,7 +50,7 @@ authRouter.post("/register", async (req, res, next) => {
 
 authRouter.post("/login", async (req, res, next) => {
   try {
-    const { username, password } = req.body;
+    const { username, password, } = req.body;
     const _user = await getUserByUsername(username);
     if (username.length === 0) {
       next({

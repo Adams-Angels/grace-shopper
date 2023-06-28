@@ -20,9 +20,15 @@ export function ProductsList() {
   return (
     <div>
       <h2>Products List</h2>
-      {/* {products.map((product)=>(
-            <ProductItem key={product.id} product = {product} />
-        ))} */}
+      {console.log(products)}
+      {/* {products.length > 0 &&
+        products.map((product) => {
+          return (
+            <div key={product.id}>
+              <p>{product.name}</p>
+            </div>
+          );
+        })} */}
     </div>
   );
 }
