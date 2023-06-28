@@ -18,7 +18,7 @@ export async function registerUser(username, password, email, is_admin) {
     console.log(error);
   }
 }
-export async function loginUser(username, password, email) {
+export async function loginUser(username, password) {
   try {
     const response = await fetch("/api/auth/login", {
       method: "POST",
@@ -28,7 +28,6 @@ export async function loginUser(username, password, email) {
       body: JSON.stringify({
         username,
         password,
-        email,
       }),
     });
     const result = await response.json();
