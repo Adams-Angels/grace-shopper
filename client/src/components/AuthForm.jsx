@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { registerUser, loginUser } from "../api/auth";
 import { useNavigate, useLocation, Link } from "react-router-dom";
+import useAuth from "../components/Auth/hooks/useAuth";
 
 export function AuthForm() {
   const [username, setUsername] = useState("");
@@ -8,7 +9,9 @@ export function AuthForm() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
   const { pathname } = useLocation();
+  const { setUser, setLoggedIn } = useAuth();
   const navigate = useNavigate();
+
   async function handleSubmit(e) {
     e.preventDefault();
     try {
@@ -20,12 +23,13 @@ export function AuthForm() {
       }
       if (result.success) {
         setLoggedIn(true);
-        navigate("/me");
+        navigate("/");
+        console.log("You're logged in");
       } else {
         setError(result.error);
       }
     } catch (error) {
-      next(error);
+      console.log(error);
     }
   }
   return (
