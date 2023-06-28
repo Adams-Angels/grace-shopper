@@ -21,14 +21,16 @@ export function ProductsList() {
     <div>
       <h2>Products List</h2>
       {console.log(products)}
-      {/* {products.length > 0 &&
+      {products.length > 0 &&
         products.map((product) => {
           return (
             <div key={product.id}>
               <p>{product.name}</p>
+              <p>{product.description}</p>
+              <p>${product.price}</p>
             </div>
           );
-        })} */}
+        })}
     </div>
   );
 }
