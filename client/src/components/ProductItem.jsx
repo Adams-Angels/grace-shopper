@@ -3,20 +3,27 @@ import { fetchProductById } from "../api/products";
 import { useParams } from "react-router-dom";
 
 export function ProductItem() {
-  const [singleProduct, setSingleProduct] = useState("");
+  const [singleProduct, setSingleProduct] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
     async function getProduct() {
       const product = await fetchProductById(id);
-      console.log("single product from react", product);
-      setSingleProduct(product);
+      setSingleProduct(product.productById);
     }
     getProduct();
-  }, []);
+  }, [id]);
+
   return (
     <div>
-      <h2>products</h2>
+      <h2>Product Details</h2>
+      {singleProduct && (
+        <div>
+          <p>Name: {singleProduct.name}</p>
+          <p>Description: {singleProduct.description}</p>
+          <p>Price: ${singleProduct.price}</p>
+        </div>
+      )}
     </div>
   );
 }
