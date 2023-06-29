@@ -48,7 +48,7 @@ const products = [
     name: "Frog Figurine 3",
     description: "A large frog sitting frog style",
     price: 15.99,
-    image: "frog_figurine3.jpeg",
+    image: "sjkl.jgp",
     inventory: 5,
     category: "Figurines",
   },
@@ -264,7 +264,8 @@ const products = [
     name: "Frog Cup 3",
     description: "Frog-themed coffee cup",
     price: 11.99,
-    image: "frog_cup3.jpeg",
+    image:
+      "https://cdn.shopify.com/s/files/1/0302/1504/5252/products/1559864432_1024x1024.jpg?v=1651769362",
     inventory: 13,
     category: "Home Decor",
   },
