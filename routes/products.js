@@ -16,18 +16,18 @@ productRouter.get("/", async (req, res, next) => {
     next(error);
   }
 });
-// api/products
-productRouter.post("/", authRequired && checkAdmin, async (req, res, next) => {
+// api/products authRequired && checkAdmin,
+productRouter.post("/", async (req, res, next) => {
   try {
     const { name, description, price, image, inventory, category } = req.body;
-    const newProduct = await createProduct({
+    const newProduct = await createProduct(
       name,
       description,
       price,
       image,
       inventory,
-      category,
-    });
+      category
+    );
     res.send(newProduct);
   } catch (error) {
     next(error);

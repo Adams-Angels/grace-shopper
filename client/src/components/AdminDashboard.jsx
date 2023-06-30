@@ -10,6 +10,7 @@ export function AdminDashboard() {
   const [inventory, setInventory] = useState("");
   const [category, setCategory] = useState("");
   const [product, setProduct] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   async function handleSubmit() {
@@ -32,7 +33,11 @@ export function AdminDashboard() {
   return (
     <div className="admin-page">
       <h1>Create Product</h1>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault(), handleSubmit();
+        }}
+      >
         <label>Name</label>
         <input
           type="text"

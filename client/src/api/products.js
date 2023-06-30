@@ -36,17 +36,16 @@ export async function createProduct(
       },
       //might need authorization or may not ?
       body: JSON.stringify({
-        post: {
-          name,
-          description,
-          price,
-          image,
-          inventory,
-          category,
-        },
+        name,
+        description,
+        price,
+        image,
+        inventory,
+        category,
       }),
     });
     const result = await response.json();
+    return result;
   } catch (error) {
     console.error(error);
   }
@@ -68,17 +67,16 @@ export async function updateProduct(
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        post: {
-          name,
-          description,
-          price,
-          image,
-          inventory,
-          category,
-        },
+        name,
+        description,
+        price,
+        image,
+        inventory,
+        category,
       }),
     });
     const result = await response.json();
+    return result;
   } catch (error) {
     console.error(error);
   }
