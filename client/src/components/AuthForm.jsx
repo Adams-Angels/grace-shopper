@@ -46,27 +46,33 @@ export function AuthForm() {
             <Link to="/login">Login</Link>
           </h2>
         )}
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
-          name="username"
-          placeholder="username"
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <label htmlFor="password">Password:</label>
-        <input
-          type="text"
-          name="password"
-          placeholder="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <label htmlFor="email">Email:</label>
-        <input
-          type="text"
-          name="email"
-          placeholder="email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <label>
+          Username:
+          <input
+            type="text"
+            name="username"
+            placeholder="username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </label>
+        <label>
+          Password:
+          <input
+            type="text"
+            name="password"
+            placeholder="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </label>
+        <label>
+          Email:
+          <input
+            type="text"
+            name="email"
+            placeholder="email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </label>
         <button>Submit!</button>
       </form>
     </div>
