@@ -58,7 +58,7 @@ export function AuthForm() {
         <label>
           Password:
           <input
-            type="text"
+            type="password"
             name="password"
             placeholder="password"
             onChange={(e) => setPassword(e.target.value)}
@@ -67,7 +67,7 @@ export function AuthForm() {
         <label>
           Email:
           <input
-            type="text"
+            type="email"
             name="email"
             placeholder="email"
             onChange={(e) => setEmail(e.target.value)}
