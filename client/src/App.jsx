@@ -7,8 +7,7 @@ import { ProductItem } from "../src/components/ProductItem";
 import { Home } from "../src/components/Home";
 import { AdminDashboard } from "./components/AdminDashboard";
 import useAuth from "./components/Auth/hooks/useAuth";
-import { useNavigate } from "react-router-dom";
-import logOut from "./api/auth";
+import { logOut } from "./api/auth";
 
 function App() {
   const { loggedIn, setLoggedIn, logout } = useAuth();
