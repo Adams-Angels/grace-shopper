@@ -1,13 +1,25 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import { ProductsList } from "../src/components/ProductsList";
 import { AuthForm } from "../src/components/AuthForm";
 import { ProductItem } from "../src/components/ProductItem";
 import { Home } from "../src/components/Home";
 import { AdminDashboard } from "./components/AdminDashboard";
+import useAuth from "./components/Auth/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import logOut from "./api/auth";
 
 function App() {
+  const { loggedIn, setLoggedIn, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    await logOut();
+    setLoggedIn(false);
+    navigate("/");
+  };
   return (
     <div>
       <header>
@@ -15,6 +27,7 @@ function App() {
         <Link to="/">Home</Link>
         <Link to="/login">Login</Link>
         <Link to="/products">All Products</Link>
+        {loggedIn && <button onClick={handleLogout}>Logout</button>}
       </header>
       <Routes>
         <Route path="/" element={<Home />} />
