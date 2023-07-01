@@ -16,18 +16,18 @@ productRouter.get("/", async (req, res, next) => {
     next(error);
   }
 });
-// api/products authRequired && checkAdmin,
-productRouter.post("/", async (req, res, next) => {
+// api/products
+productRouter.post("/", authRequired, checkAdmin, async (req, res, next) => {
   try {
     const { name, description, price, image, inventory, category } = req.body;
-    const newProduct = await createProduct(
+    const newProduct = await createProduct({
       name,
       description,
       price,
       image,
       inventory,
-      category
-    );
+      category,
+    });
     res.send(newProduct);
   } catch (error) {
     next(error);
@@ -46,7 +46,8 @@ productRouter.get("/:id", async (req, res, next) => {
 // api/products/:id
 productRouter.patch(
   "/:id",
-  authRequired && checkAdmin,
+  authRequired,
+  checkAdmin,
   async (req, res, next) => {
     try {
       const { id } = req.params;
@@ -69,7 +70,8 @@ productRouter.patch(
 // 3 does not want to get deleted
 productRouter.delete(
   "/:id",
-  authRequired && checkAdmin,
+  authRequired,
+  checkAdmin,
   async (req, res, next) => {
     try {
       const { id } = req.params;
