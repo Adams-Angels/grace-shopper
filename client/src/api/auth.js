@@ -13,6 +13,7 @@ export async function registerUser(username, password, email, is_admin) {
       }),
     });
     const result = await response.json();
+    console.log("registration successful");
     return result;
   } catch (error) {
     console.log(error);
@@ -31,6 +32,7 @@ export async function loginUser(username, password) {
       }),
     });
     const result = await response.json();
+    console.log("logged in successful");
     return result;
   } catch (error) {
     console.log(error);
@@ -46,11 +48,14 @@ export async function fetchMe() {
         message,
       };
     }
-    return {
-      success,
-      message,
-      user,
-    };
+    return (
+      {
+        success,
+        message,
+        user,
+      },
+      console.log("fetch me")
+    );
   } catch (error) {
     console.log(error);
   }
