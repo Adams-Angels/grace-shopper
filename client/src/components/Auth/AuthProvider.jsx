@@ -13,8 +13,10 @@ const AuthProvider = ({ children }) => {
         setUser(user);
         if (Object.keys(user).length > 0) {
           setLoggedIn(true);
+          console.log("logged in auth", user);
         } else {
           setLoggedIn(false);
+          console.log("logged in failed auth");
         }
       } catch (error) {
         setUser({ username: "Guest" });
