@@ -85,7 +85,7 @@ export function AdminDashboard() {
 
         <label>image </label>
         <input
-          type="text"
+          type="url"
           value={image}
           onChange={(e) => {
             setImage(e.target.value);

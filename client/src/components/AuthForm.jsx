@@ -46,6 +46,7 @@ export function AuthForm() {
             <Link to="/login">Login</Link>
           </h2>
         )}
+
         <label>
           Username:
           <input
@@ -58,21 +59,25 @@ export function AuthForm() {
         <label>
           Password:
           <input
-            type="text"
+            type="password"
             name="password"
             placeholder="password"
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
-        <label>
-          Email:
-          <input
-            type="text"
-            name="email"
-            placeholder="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
+        {pathname === "/register" ? (
+          <label>
+            Email:
+            <input
+              type="email"
+              name="email"
+              placeholder="email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </label>
+        ) : (
+          ""
+        )}
         <button>Submit!</button>
       </form>
     </div>
