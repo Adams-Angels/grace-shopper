@@ -21,12 +21,18 @@ function App() {
   };
   return (
     <div>
-      <header>
-        <h1>All Things Frog</h1>
-        <Link to="/">Home</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/products">All Products</Link>
-        {loggedIn && <button onClick={handleLogout}>Logout</button>}
+      <header className="header">
+        <h1 className="title">All Things Frog</h1>
+        <div className="links">
+          <Link to="/">Home</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/products">All Products</Link>
+        </div>
+        {loggedIn && (
+          <button className="button" onClick={handleLogout}>
+            Logout
+          </button>
+        )}
       </header>
       <Routes>
         <Route path="/" element={<Home />} />
