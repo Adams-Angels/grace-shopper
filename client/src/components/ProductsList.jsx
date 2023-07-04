@@ -1,9 +1,14 @@
 import react, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { fetchAllProducts } from "../../src/api/products";
+import { addLineItem } from "../../src/api/lineItems";
+import { createOrder } from "../../src/api/orders";
 
 export function ProductsList() {
   const [products, setProducts] = useState([]);
+  const [quantity, setQuantity] = useState();
+  const [orderId, setOrderId] = useState();
+  const { user } = useParams();
 
   useEffect(() => {
     async function fetchProducts() {
@@ -16,6 +21,25 @@ export function ProductsList() {
     }
     fetchProducts();
   }, []);
+
+  // useEffect(() => {
+  //   async function findOrderId() {
+  //     try {
+  //       if (user.order.status === false) {
+  //         setOrderId(order.id);
+  //       } else if (user.order.status === true) {
+  //         createOrder()
+  //       }
+  //     } catch (error) {}
+  //   }
+  // });
+
+  // async function handleClick(e) {
+  //   e.preventDefault();
+  //   try {
+  //     const result = await addLineItem();
+  //   } catch (error) {}
+  // }
 
   return (
     <div>
@@ -30,6 +54,9 @@ export function ProductsList() {
               </Link>
               <p>{product.description}</p>
               <p>${product.price}</p>
+              {/* <label>Quantity:</label>
+              <input type="number" /> */}
+              {/* <button onClick={handleClick}>Add to cart</button> */}
             </div>
           );
         })}
