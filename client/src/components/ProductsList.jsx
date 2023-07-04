@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { fetchAllProducts } from "../../src/api/products";
 import { addLineItem } from "../../src/api/lineItems";
 import { createOrder } from "../../src/api/orders";
-import "./productsList.css";
+import "../components/ProductsList.css";
 
 export function ProductsList() {
   const [products, setProducts] = useState([]);
