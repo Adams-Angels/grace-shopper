@@ -8,6 +8,7 @@ import { Home } from "../src/components/Home";
 import { AdminDashboard } from "./components/AdminDashboard";
 import useAuth from "./components/Auth/hooks/useAuth";
 import { logOut } from "./api/auth";
+import { MyProfile } from "./components/MyProfile";
 
 function App() {
   const { loggedIn, setLoggedIn, logout } = useAuth();
@@ -26,6 +27,7 @@ function App() {
         <div className="links">
           <Link to="/">Home</Link>
           <Link to="/login">Login</Link>
+          {loggedIn && <Link to="/my-profile">My Profile</Link>}
           <Link to="/products">All Products</Link>
         </div>
         {loggedIn && (
@@ -41,6 +43,7 @@ function App() {
         <Route path="/register" element={<AuthForm />} />
         <Route path="/products/:id" element={<ProductItem />} />
         <Route path="/create-product" element={<AdminDashboard />} />
+        <Route path="/my-profile" element={<MyProfile />} />
       </Routes>
     </div>
   );
