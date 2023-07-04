@@ -55,9 +55,9 @@ export function ProductsList() {
                   <div className="product-image">
                     <img src={product.image} alt={product.name} />
                   </div>
+                  <h3>{product.name}</h3>
                 </Link>
                 <div className="product-info">
-                  <h3>{product.name}</h3>
                   <p>{product.description}</p>
                   <p>${product.price}</p>
                   {/* <label>Quantity:</label>
