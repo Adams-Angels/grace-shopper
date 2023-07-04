@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { fetchAllProducts } from "../../src/api/products";
 import { addLineItem } from "../../src/api/lineItems";
 import { createOrder } from "../../src/api/orders";
+import "./productsList.css";
 
 export function ProductsList() {
   const [products, setProducts] = useState([]);
@@ -42,24 +43,34 @@ export function ProductsList() {
   // }
 
   return (
-    <div>
+    <div className="products-list">
       <h2>Products List</h2>
-      {console.log(products)}
-      {products.length > 0 &&
-        products.map((product) => {
-          return (
-            <div key={product.id}>
-              <Link to={`/products/${product.id}`}>
-                <p>{product.name}</p>
-              </Link>
-              <p>{product.description}</p>
-              <p>${product.price}</p>
-              {/* <label>Quantity:</label>
+      <div className="product-grid">
+        {console.log(products)}
+        {products.length > 0 &&
+          products.map((product) => {
+            return (
+              <div className="product-item" key={product.id}>
+                <Link to={`/products/${product.id}`}>
+                  <div className="product-image">
+                    <img src={product.image} alt={product.name} />
+                  </div>
+                </Link>
+                <div className="product-info">
+                  <h3>{product.name}</h3>
+                  <p>{product.description}</p>
+                  <p>${product.price}</p>
+                  {/* <label>Quantity:</label>
               <input type="number" /> */}
-              {/* <button onClick={handleClick}>Add to cart</button> */}
-            </div>
-          );
-        })}
+                  {/* <button onClick={handleClick}>Add to cart</button> */}
+                  <button onClick={() => handleAddToCart(product.id)}>
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+      </div>
     </div>
   );
 }
