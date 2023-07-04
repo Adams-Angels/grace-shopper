@@ -1,0 +1,36 @@
+.products-list {
+  justify-content: space-evenly;
+  font-family: "Montserrat", sans-serif;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* .product-item {
+  /* Add styles for each product item container */
+/* } */
+*/ .product-image img {
+  width: 85%;
+}
+
+.product-info {
+  text-align: center;
+}
+
+.product-info h3 {
+  justify-content: space-evenly;
+  font-family: "Montserrat", sans-serif;
+}
+
+.product-info p {
+  justify-content: space-evenly;
+  font-family: "Montserrat", sans-serif;
+}
+
+.product-info button {
+  justify-content: space-evenly;
+  font-family: "Montserrat", sans-serif;
+}
