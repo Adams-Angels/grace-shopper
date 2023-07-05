@@ -50,6 +50,7 @@ export function ProductsList() {
         {products.length > 0 &&
           products.map((product) => {
             return (
+              // This could be another component
               <div className="product-item" key={product.id}>
                 <Link to={`/products/${product.id}`}>
                   <div className="product-image">

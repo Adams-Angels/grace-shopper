@@ -1,13 +1,20 @@
 const client = require("../client");
 const { getProductById } = require("./products");
 
+// Error class name shows up better in some tooling than a string message
+exports.ProductNotFound = class ProductNotFound extends Error {};
+// Nice to have specific error classes for specific handling
+// if (error instanceof ProductNotFound) { /** handle specifically */}
+
+// Adds an item to an order
 async function createLineItem(quantity, orderId, productId, price) {
   try {
     console.log("Starting to create LineItems");
     // Check if the product exists
     const product = await getProductById(productId);
+    // use the price coming from the product from DB
     if (!product) {
-      throw new Error("Product not found");
+      throw new ProductNotFound();
     }
 
     const {
@@ -115,6 +122,8 @@ async function getAllLineItems() {
   }
 }
 
+// Should only update quantity
+// Separate adapter for Admin to update price quantity etc.
 async function updateLineItem(id, quantity, orderId, productId, price) {
   try {
     const {

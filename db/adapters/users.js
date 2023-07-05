@@ -1,21 +1,18 @@
 const client = require("../client");
 
+// Try catch not needed
 async function createUser({ username, password, email, is_admin }) {
-  try {
-    const {
-      rows: [user],
-    } = await client.query(
-      `
+  const {
+    rows: [user],
+  } = await client.query(
+    `
           INSERT INTO  users(username, password, email, is_admin)
           VALUES($1, $2, $3, $4)
           ON CONFLICT (username) DO NOTHING
           RETURNING *;`,
-      [username, password, email, is_admin]
-    );
-    return user;
-  } catch (error) {
-    throw error;
-  }
+    [username, password, email, is_admin]
+  );
+  return user;
 }
 
 async function getUser() {

@@ -11,17 +11,21 @@ import { logOut } from "./api/auth";
 import { MyProfile } from "./components/MyProfile";
 
 function App() {
-  const { loggedIn, setLoggedIn, logout } = useAuth();
+  const { loggedIn, setLoggedIn, logout, user } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = async (e) => {
     e.preventDefault();
     await logOut();
     setLoggedIn(false);
+    // Explicitly triggers a full refresh to dump out any user state
+    // window.location.href = '/'
     navigate("/");
   };
+
   return (
     <div>
+      {/** Header could be its own component */}
       <header className="header">
         <h1 className="title">All Things Frog</h1>
         <div className="links">
@@ -42,7 +46,9 @@ function App() {
         <Route path="/login" element={<AuthForm />} />
         <Route path="/register" element={<AuthForm />} />
         <Route path="/products/:id" element={<ProductItem />} />
-        <Route path="/create-product" element={<AdminDashboard />} />
+        {user.isAdmin && (
+          <Route path="/create-product" element={<AdminDashboard />} />
+        )}
         <Route path="/my-profile" element={<MyProfile />} />
       </Routes>
     </div>

@@ -37,6 +37,7 @@ async function createTables() {
     CREATE TABLE orders (
       id SERIAL PRIMARY KEY,
       user_id INTEGER REFERENCES users(id),
+      -- change to isCart or isCheckedOut as Boolean or Timestamp
       status BOOLEAN DEFAULT FALSE
     );
      CREATE TABLE products (

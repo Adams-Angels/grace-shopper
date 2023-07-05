@@ -59,6 +59,7 @@ async function getAllProducts() {
   }
 }
 
+// What if i want to only update one field?? Juicebox has an example of an update query
 async function updateProduct(id, product) {
   try {
     const {

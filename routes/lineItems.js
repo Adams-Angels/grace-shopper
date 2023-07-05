@@ -41,6 +41,7 @@ lineItemRouter.post("/", async (req, res, next) => {
   }
 });
 
+// Make sure arg match for adapter
 lineItemRouter.patch("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -58,7 +59,8 @@ lineItemRouter.delete("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const deletedLineItem = await destroyLineItem(id);
-    res.send({ message: "lineItem deleted" });
+    // return the deleted obj
+    res.send({ message: "lineItem deleted", deletedLineItem });
   } catch (error) {
     next(error);
   }
