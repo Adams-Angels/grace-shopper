@@ -1,4 +1,4 @@
-export async function addLineItem(quantity, orderId, productId, price) {
+export async function addLineItem(quantity, orderId, productId) {
   try {
     const response = await fetch(`/api/lineitems/`, {
       method: "POST",
@@ -10,7 +10,6 @@ export async function addLineItem(quantity, orderId, productId, price) {
         quantity,
         orderId,
         productId,
-        price,
       }),
     });
     const result = await response.json();

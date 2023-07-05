@@ -1,7 +1,7 @@
 const client = require("../client");
 const { getProductById } = require("./products");
 
-async function createLineItem(quantity, orderId, productId, price) {
+async function createLineItem(quantity, orderId, productId) {
   try {
     console.log("Starting to create LineItems");
     // Check if the product exists
@@ -13,11 +13,11 @@ async function createLineItem(quantity, orderId, productId, price) {
     const {
       rows: [createdLineItem],
     } = await client.query(
-      `INSERT INTO lineitems (quantity, order_id, product_id, price)
-      VALUES ($1, $2, $3, $4)
+      `INSERT INTO lineitems (quantity, order_id, product_id)
+      VALUES ($1, $2, $3)
       RETURNING *;
       `,
-      [quantity, orderId, productId, price]
+      [quantity, orderId, productId]
     );
     console.log("Created LineItem:", createdLineItem);
     return createdLineItem;
@@ -115,7 +115,7 @@ async function getAllLineItems() {
   }
 }
 
-async function updateLineItem(id, quantity, orderId, productId, price) {
+async function updateLineItem(id, { quantity }) {
   try {
     const {
       rows: [updatedlineItem],
@@ -123,13 +123,10 @@ async function updateLineItem(id, quantity, orderId, productId, price) {
       `
       UPDATE lineitems
       SET quantity = $2,
-          order_id = $3,
-          product_id = $4,
-          price = $5
       WHERE id = $1
       RETURNING *;
       `,
-      [id, quantity, orderId, productId, price]
+      [id, quantity]
     );
     console.log("Updated lineItem:", updatedlineItem);
     return updatedlineItem;
