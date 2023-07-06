@@ -55,17 +55,15 @@ export function ProductsList() {
                   <div className="product-image">
                     <img src={product.image} alt={product.name} />
                   </div>
-                  <h3>{product.name}</h3>
                 </Link>
+                <h3>{product.name}</h3>
                 <div className="product-info">
-                  <p>{product.description}</p>
                   <p>${product.price}</p>
-                  {/* <label>Quantity:</label>
-              <input type="number" /> */}
-                  {/* <button onClick={handleClick}>Add to cart</button> */}
-                  <button onClick={() => handleAddToCart(product.id)}>
-                    Add to Cart
-                  </button>
+                  <Link to={`/products/${product.id}`}>
+                    <button onClick={() => handleAddToCart(product.id)}>
+                      See Details
+                    </button>
+                  </Link>
                 </div>
               </div>
             );
