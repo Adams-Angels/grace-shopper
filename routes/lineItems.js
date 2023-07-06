@@ -53,7 +53,7 @@ lineItemRouter.delete("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const deletedLineItem = await destroyLineItem(id);
-    res.send({ message: "lineItem deleted" });
+    res.send({ message: "lineItem deleted", deletedLineItem });
   } catch (error) {
     next(error);
   }

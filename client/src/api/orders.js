@@ -11,18 +11,18 @@ export async function fetchOrders() {
   }
 }
 
-export async function createOrder(order) {
+export async function createOrder(user_id, is_cart) {
   try {
     const response = await fetch("/api/orders", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(order),
+      body: JSON.stringify(user_id, is_cart),
     });
     if (response.ok) {
       const data = await response.json();
-      return data.order;
+      return data;
     }
   } catch (error) {
     console.error(error);
@@ -42,14 +42,14 @@ export async function fetchOrderById(orderId) {
   }
 }
 
-export async function updateOrder(orderId, updatedOrder) {
+export async function updateOrder(orderId, is_cart) {
   try {
     const response = await fetch(`/api/orders/${orderId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(updatedOrder),
+      body: JSON.stringify(is_cart),
     });
     if (response.ok) {
       const data = await response.json();
