@@ -29,24 +29,24 @@ async function createTables() {
     await client.query(`
     CREATE TABLE users(
       id SERIAL PRIMARY KEY,
-      username VARCHAR(255) UNIQUE NOT NULL,
-      password VARCHAR(255) NOT NULL,
-      email VARCHAR(255) UNIQUE NOT NULL,
+      username TEXT UNIQUE NOT NULL,
+      password TEXT NOT NULL,
+      email TEXT UNIQUE NOT NULL,
       is_admin BOOLEAN DEFAULT FALSE
     );
     CREATE TABLE orders (
       id SERIAL PRIMARY KEY,
       user_id INTEGER REFERENCES users(id),
-      status BOOLEAN DEFAULT FALSE
+      is_cart BOOLEAN DEFAULT FALSE
     );
      CREATE TABLE products (
       id SERIAL PRIMARY KEY,
-      name VARCHAR(255) NOT NULL,
+      name TEXT NOT NULL,
       description TEXT,
       price NUMERIC(10, 2),
       image TEXT,
       inventory INTEGER,
-      category VARCHAR(255)
+      category TEXT
     );
       CREATE TABLE lineitems (
       id SERIAL PRIMARY KEY,

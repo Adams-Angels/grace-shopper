@@ -21,8 +21,8 @@ ordersRouter.get("/", async (req, res, next) => {
 // api/orders/create-order
 ordersRouter.post("/create-order", async (req, res, next) => {
   try {
-    const { user_id, status } = req.body;
-    const newOrder = await createOrders(user_id, status);
+    const { user_id, is_cart } = req.body;
+    const newOrder = await createOrders(user_id, is_cart);
     res.send(newOrder);
   } catch (error) {
     next(error);
@@ -48,10 +48,9 @@ ordersRouter.get("/:id", async (req, res, next) => {
 ordersRouter.patch("/:id", authRequired, async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { user_id, status } = req.body;
+    const { is_cart } = req.body;
     const updatedOrders = await updateOrders(id, {
-      user_id,
-      status,
+      is_cart,
     });
     res.send(updatedOrders);
   } catch (error) {
@@ -64,8 +63,8 @@ ordersRouter.patch("/:id", authRequired, async (req, res, next) => {
 ordersRouter.delete("/:id", authRequired, async (req, res, next) => {
   try {
     const { id } = req.params;
-    const order = await destroyOrder(id);
-    res.send({ message: "Deleted order!" });
+    const deletedOrder = await destroyOrder(id);
+    res.send({ message: "Deleted order!", deletedOrder });
   } catch (error) {
     next(error);
   }
