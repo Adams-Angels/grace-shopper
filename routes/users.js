@@ -2,10 +2,6 @@ const usersRouter = require("express").Router();
 const { authRequired } = require("./utils");
 const { getAllUsers, getUserById } = require("../db/adapters/users");
 
-usersRouter.get("/me", authRequired, async (req, res, next) => {
-  res.send({ success: true, message: "you are authorized", user: req.user });
-});
-
 usersRouter.get("/", async (req, res, next) => {
   try {
     const users = await getAllUsers();

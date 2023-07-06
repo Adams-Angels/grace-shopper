@@ -7,6 +7,10 @@ const SALT_ROUNDS = 10;
 const { authRequired } = require("./utils");
 const { JWT_SECRET } = process.env;
 
+authRouter.get("/me", authRequired, async (req, res, next) => {
+  res.send({ success: true, message: "you are authorized", user: req.user });
+});
+
 authRouter.post("/register", async (req, res, next) => {
   try {
     const { username, password, email, is_admin } = req.body;
@@ -50,7 +54,7 @@ authRouter.post("/register", async (req, res, next) => {
 
 authRouter.post("/login", async (req, res, next) => {
   try {
-    const { username, password, } = req.body;
+    const { username, password } = req.body;
     const _user = await getUserByUsername(username);
     if (username.length === 0) {
       next({

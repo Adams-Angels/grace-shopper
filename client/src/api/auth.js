@@ -40,22 +40,21 @@ export async function loginUser(username, password) {
 }
 
 export async function fetchMe() {
+  console.log("hello from auth provider");
   try {
-    const response = await fetch("/api/users/me");
+    const response = await fetch("/api/auth/me");
     const { success, message, user } = await response.json();
     if (!success) {
       throw {
         message,
       };
     }
-    return (
-      {
-        success,
-        message,
-        user,
-      },
-      console.log("fetch me")
-    );
+    console.log("fetch me user: ", user);
+    return {
+      success,
+      message,
+      user,
+    };
   } catch (error) {
     console.log(error);
   }
