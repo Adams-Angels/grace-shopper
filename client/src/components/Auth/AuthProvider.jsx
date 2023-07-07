@@ -7,31 +7,20 @@ const AuthProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   console.log("authprovider mounted");
 
-  async function getMe() {
-    // try {
-    const user = await fetchMe();
-    console.log("user from auth provider", user);
-    console.log("id", user.user.id);
-    setUser(user);
-    if (user.user.id) {
-      setLoggedIn(true);
-      console.log("logged in auth", user);
-      console.log("logged in?: ", loggedIn);
-    }
-    //else {
-    //     setLoggedIn(false);
-    //     console.log("logged in failed auth");
-    //   }
-    // } catch (error) {
-    //   setUser({ username: "Guestt" });
-    //   setLoggedIn(false);
-    //   console.log(error);
-    // }
-  }
   useEffect(() => {
     console.log("useEffect triggered");
+    async function getMe() {
+      try {
+        const { success, message, user } = await fetchMe();
+        console.log("User in Use Effect: ", user);
+        setUser(user);
+      } catch (error) {
+        setLoggedIn(false);
+        console.log(error);
+      }
+    }
     getMe();
-  }, []);
+  }, [loggedIn]);
 
   const contextValue = {
     user,
