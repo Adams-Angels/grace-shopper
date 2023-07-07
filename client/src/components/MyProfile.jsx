@@ -4,7 +4,7 @@ export function MyProfile() {
   console.log("user from myprofile", user);
   return (
     <div>
-      <h3>Welcome, {user.user.username}</h3>
+      <h3>Welcome, {user.username}</h3>
     </div>
   );
 }
