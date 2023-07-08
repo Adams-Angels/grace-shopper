@@ -718,8 +718,8 @@ const products = [
 ];
 
 const orders = [
-  { user_id: 1, status: true },
-  { user_id: 2, status: false },
+  { user_id: 1, is_cart: true },
+  { user_id: 2, is_cart: false },
   // can add more
 ];
 

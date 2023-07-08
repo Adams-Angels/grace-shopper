@@ -37,7 +37,7 @@ async function getLineItemById(id) {
 	
       JSON_BUILD_OBJECT (
            'id', orders.id,
-           'status', orders.status,
+           'is_cart', orders.is_cart,
            'user_id', orders.user_id,
            'line_items',
             COALESCE((
@@ -81,7 +81,7 @@ async function getAllLineItems() {
 	
     JSON_BUILD_OBJECT (
          'id', orders.id,
-         'status', orders.status,
+         'is_cart', orders.is_cart,
          'user_id', orders.user_id,
          'line_items',
           COALESCE((
