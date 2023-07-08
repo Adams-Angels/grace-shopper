@@ -71,7 +71,7 @@ async function populateTables() {
       Promise.all(users.map(createUser)),
       Promise.all(products.map(createProduct)),
       Promise.all(
-        orders.map((order) => createOrders(order.user_id, order.status))
+        orders.map((order) => createOrders(order.user_id, order.is_cart))
       ),
       Promise.all(
         lineItems.map((lineItem) =>
