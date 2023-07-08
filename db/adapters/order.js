@@ -1,16 +1,16 @@
 const client = require("../client");
 
-async function createOrders(user_id, status) {
+async function createOrders(user_id, is_cart) {
   console.log("starting to create order");
   try {
     const {
       rows: [order],
     } = await client.query(
-      ` INSERT INTO orders (user_id, status)
+      ` INSERT INTO orders (user_id, is_cart)
         VALUES ($1, $2)
         RETURNING *; 
         `,
-      [user_id, status]
+      [user_id, is_cart]
     );
     console.log("order from db:", order);
     return order;
@@ -49,7 +49,7 @@ async function getAllOrders() {
   }
 }
 
-async function updateOrders(user_id, status) {
+async function updateOrders(user_id, is_cart) {
   try {
     console.log("updating order");
     const {
@@ -57,10 +57,10 @@ async function updateOrders(user_id, status) {
     } = await client.query(
       `
         UPDATE orders 
-        SET status = $2
+        SET is_cart = $2
         WHERE id=$1
         `,
-      [user_id, status]
+      [user_id, is_cart]
     );
     return order;
   } catch (error) {
