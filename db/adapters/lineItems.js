@@ -123,7 +123,7 @@ async function updateLineItem(id, { quantity }) {
       `
       UPDATE lineitems
       SET quantity = $2,
-      WHERE id = $1
+      WHERE id = $1,
       RETURNING *;
       `,
       [id, quantity]
