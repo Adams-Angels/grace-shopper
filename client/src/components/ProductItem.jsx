@@ -16,6 +16,7 @@ export function ProductItem() {
   const [cartId, setCartId] = useState();
   const { id } = useParams();
   const { user } = useAuth();
+  const [isCart, setIscart] = useState(true);
 
   console.log(singleProduct);
 
@@ -39,7 +40,8 @@ export function ProductItem() {
         //   return setCartId(cartOrder);
         // } else {
         //create a new cart order for the user
-        const newOrder = await createOrder(user.id, true);
+        const newOrder = await createOrder(user.id, isCart);
+
         console.log("new order from product items", newOrder);
         return setCartId(newOrder);
         // }
