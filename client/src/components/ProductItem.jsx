@@ -8,11 +8,14 @@ import {
 import { createOrder, fetchOrders } from "../api/orders";
 import { useParams } from "react-router-dom";
 import { fetchOrderById } from "../api/orders";
+import useAuth from "./Auth/hooks/useAuth";
 
 export function ProductItem() {
   const [singleProduct, setSingleProduct] = useState(null);
   const [quantity, setQuantity] = useState(0);
+  const [cartId, setCartId] = useState();
   const { id } = useParams();
+  const { user } = useAuth();
 
   console.log(singleProduct);
 
@@ -26,7 +29,33 @@ export function ProductItem() {
 
   const handleAddToCart = async () => {
     try {
-      const orderId = await fetchOrderById();
+      const getOrderId = async () => {
+        try {
+          //check if the user already has a cart order
+          const orders = await fetchOrders();
+          const cartOrder = orders.find(
+            (order) => order.user_id === user.id && order.is_cart === true
+          );
+          if (cartOrder) {
+            return (
+              setCartId(cartOrder),
+              console.log("cart order from product items", cartOrder)
+            );
+          } else {
+            //create a new cart order for the user
+            const newOrder = await createOrder(user_id, is_cart);
+            return (
+              setCartId(newOrder),
+              console.log("new order from product items", newOrder)
+            );
+          }
+        } catch (error) {
+          //handle error
+          console.error("Error getting order ID:", error);
+        }
+        getOrderId();
+      };
+      const orderId = await fetchOrderById(cartId);
       const lineItem = await fetchLineItemsById(orderId);
       if (lineItem) {
         //ine item already exsists, update the quantity
@@ -45,26 +74,6 @@ export function ProductItem() {
     } catch (error) {
       //handle error
       console.error("Error adding a product to cart:", error);
-    }
-  };
-
-  const getOrderId = async () => {
-    try {
-      //check if the user already has a cart order
-      const orders = await fetchOrders();
-      const cartOrder = orders.find(
-        (order) => order.user_id === user.id && order.is_cart === true
-      );
-      if (cartOrder) {
-        return cartOrder.id;
-      } else {
-        //create a new cart order for the user
-        const newOrder = await createOrder(user_id, is_cart);
-        return newOrder.id;
-      }
-    } catch (error) {
-      //handle error
-      console.error("Error getting order ID:", error);
     }
   };
 
