@@ -52,8 +52,7 @@ async function createTables() {
       id SERIAL PRIMARY KEY,
       quantity INTEGER,
       order_id INTEGER REFERENCES orders(id) NOT NULL,
-      product_id INTEGER REFERENCES products(id) NOT NULL,
-      price NUMERIC(10, 2)
+      product_id INTEGER REFERENCES products(id) NOT NULL
     );
    
    
