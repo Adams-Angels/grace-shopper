@@ -47,20 +47,20 @@ export function ProductItem() {
         // }
       };
       getOrderId();
-      const orderId = await fetchOrderById(cartId);
-      const lineItem = await fetchLineItemsById(orderId);
-      if (lineItem) {
-        //ine item already exsists, update the quantity
-        const updatedLineItem = {
-          ...lineItem,
-          quantity: lineItem.quantity + 1,
-        };
-        await updateLineItem(lineItem.id, updatedLineItem);
-      } else {
-        //Line item doesn't exist, create a new one
-        await addLineItem(1, orderId, id);
-        console.log("Product added to cart successfully!");
-      }
+      // const orderId = await fetchOrderById(cartId);
+      // const lineItem = await fetchLineItemsById(orderId);
+      // if (lineItem) {
+      //   //ine item already exsists, update the quantity
+      //   const updatedLineItem = {
+      //     ...lineItem,
+      //     quantity: lineItem.quantity + 1,
+      //   };
+      // await updateLineItem(lineItem.id, updatedLineItem);
+      // } else {
+      //Line item doesn't exist, create a new one
+      await addLineItem(1, cartId, id);
+      console.log("Product added to cart successfully!");
+      // }
 
       // Success! Show a message or error
     } catch (error) {
