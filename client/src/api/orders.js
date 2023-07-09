@@ -18,7 +18,7 @@ export async function createOrder(user_id, is_cart) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(user_id, is_cart),
+      body: JSON.stringify({ user_id, is_cart }),
     });
     if (response.ok) {
       const data = await response.json();
