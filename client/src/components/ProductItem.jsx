@@ -30,31 +30,21 @@ export function ProductItem() {
   const handleAddToCart = async () => {
     try {
       const getOrderId = async () => {
-        try {
-          //check if the user already has a cart order
-          const orders = await fetchOrders();
-          const cartOrder = orders.find(
-            (order) => order.user_id === user.id && order.is_cart === true
-          );
-          if (cartOrder) {
-            return (
-              setCartId(cartOrder),
-              console.log("cart order from product items", cartOrder)
-            );
-          } else {
-            //create a new cart order for the user
-            const newOrder = await createOrder(user_id, is_cart);
-            return (
-              setCartId(newOrder),
-              console.log("new order from product items", newOrder)
-            );
-          }
-        } catch (error) {
-          //handle error
-          console.error("Error getting order ID:", error);
-        }
-        getOrderId();
+        //check if the user already has a cart order
+        const orders = await fetchOrders();
+        // const cartOrder = orders.find((order) => {
+        //   order.user_id === user.id && order.is_cart === true;
+        // }, console.log("cart order from product items", cartOrder));
+        // if (cartOrder !== undefined) {
+        //   return setCartId(cartOrder);
+        // } else {
+        //create a new cart order for the user
+        const newOrder = await createOrder(user.id, true);
+        console.log("new order from product items", newOrder);
+        return setCartId(newOrder);
+        // }
       };
+      getOrderId();
       const orderId = await fetchOrderById(cartId);
       const lineItem = await fetchLineItemsById(orderId);
       if (lineItem) {

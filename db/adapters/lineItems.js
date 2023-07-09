@@ -48,7 +48,7 @@ async function getLineItemById(id) {
                  'lineitem_id', lineitems.id ,
                  'quantity', lineitems.quantity,
                   'product_id', products.id,
-                  'total_price', lineitems.quantity * lineitems.price,
+                  'total_price', lineitems.quantity * products.price,
                   'product_name', products.name,
                   'products_img', products.image
                )
@@ -92,7 +92,7 @@ async function getAllLineItems() {
                'lineitem_id', lineitems.id ,
                'quantity', lineitems.quantity,
                 'product_id', products.id,
-                'total_price', lineitems.quantity * lineitems.price,
+                'total_price', lineitems.quantity * products.price,
                 'product_name', products.name,
                 'products_img', products.image
              )

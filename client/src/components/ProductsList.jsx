@@ -60,9 +60,7 @@ export function ProductsList() {
                 <div className="product-info">
                   <p>${product.price}</p>
                   <Link to={`/products/${product.id}`}>
-                    <button onClick={() => handleAddToCart(product.id)}>
-                      See Details
-                    </button>
+                    <button>See Details</button>
                   </Link>
                 </div>
               </div>
