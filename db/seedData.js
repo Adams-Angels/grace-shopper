@@ -713,6 +713,93 @@ const products = [
     inventory: 52,
     category: "Home Goods",
   },
+  {
+    name: "Frog T-shirt",
+    description: "Green shirt with a cartoon style frog on it",
+    price: 18.99,
+    image:
+      "https://images-na.ssl-images-amazon.com/images/I/81tlTtJyHGL._AC_UL1500_.jpg",
+    inventory: 27,
+    category: "Clothing",
+  },
+  {
+    name: "Frog moon shirt",
+    description: "Shirt with a frog on a tree branch in front of the moon",
+    price: 24.99,
+    image: "https://www.animalshirts.net/frogshirts/frogmoon.jpg",
+    inventory: 35,
+    category: "Clothing",
+  },
+  {
+    name: "Frog skirt",
+    description: "Skirt with green and pink frog pattern",
+    price: 21.99,
+    image:
+      "https://i.pinimg.com/originals/7a/59/98/7a599846ce97c77bb3d46a1b8f8e7210.png",
+    inventory: 52,
+    category: "Clothing",
+  },
+  {
+    name: "Vintage frog skirt",
+    description: "Long vintage frog skirt with pockets",
+    price: 30.99,
+    image:
+      "https://i.etsystatic.com/9241325/r/il/b30dd0/756427274/il_fullxfull.756427274_fpb8.jpg",
+    inventory: 27,
+    category: "Clothing",
+  },
+  {
+    name: "Bikini Frog",
+    description: "Statue of a frog in a bikini",
+    price: 35.0,
+    image:
+      "https://img1.etsystatic.com/000/0/5132951/il_fullxfull.27120109.jpg",
+    inventory: 100,
+    category: "Figurines",
+  },
+  {
+    name: "Frog bucket hat",
+    description: "Frog themed bucket hat",
+    price: 18.99,
+    image:
+      "https://images-na.ssl-images-amazon.com/images/I/71p0UT3hD+L._AC_UL1500_.jpg",
+    inventory: 25,
+    category: "Accessorys",
+  },
+  {
+    name: "Skateboard frog hoodie",
+    description: "Hoodie with a cartoon frog riding a skateboad on it",
+    price: 44.99,
+    image: "https://m.media-amazon.com/images/I/61M1f5gD25L._AC_UL1500_.jpg",
+    inventory: 47,
+    category: "Clothing",
+  },
+  {
+    name: "Birdwatching frog",
+    description: "Statue of a frog watching for birds",
+    price: 33.99,
+    image:
+      "https://i.pinimg.com/736x/53/cf/87/53cf87416551bb5e3a294262b12b2a31--outdoor-statues-garden-statues.jpg",
+    inventory: 21,
+    category: "Figurines",
+  },
+  {
+    name: "Frog teapot",
+    description: "Green frog teapot",
+    price: 44.99,
+    image:
+      "https://www.pussnpoochgallery.com.au/WebRoot/ecshared01/Shops/pussnpooch/5893/B94E/9084/EAFF/6CE3/AC10/003F/AD82/OG2013.jpg",
+    inventory: 36,
+    category: "Home Goods",
+  },
+  {
+    name: "Frog T-shirt 2",
+    description: "Frogs climbing a tree peace sign shirt",
+    price: 25.99,
+    image: "https://www.animalshirt.net/wp-content/uploads/2013/09/10-2289.jpg",
+    inventory: 53,
+    category: "Clothing",
+  },
 
   // please help!  :)  we need hundreds, I started with the ones we have images for
 ];
