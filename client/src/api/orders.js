@@ -13,7 +13,7 @@ export async function fetchOrders() {
 
 export async function createOrder(user_id, is_cart) {
   try {
-    const response = await fetch("/api/orders", {
+    const response = await fetch("/api/orders/create-order", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
