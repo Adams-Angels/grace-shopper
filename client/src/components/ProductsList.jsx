@@ -11,7 +11,7 @@ export function ProductsList() {
   const [products, setProducts] = useState([]);
   const [quantity, setQuantity] = useState("");
   const { user } = useParams();
-  // const { loggedIn } = useAuth();
+  const { loggedIn } = useAuth();
 
   useEffect(() => {
     async function fetchProducts() {
