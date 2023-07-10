@@ -1,11 +1,11 @@
 const client = require("../client");
 const { getProductById } = require("./products");
 
-async function createLineItem(quantity, orderId, productId) {
+async function createLineItem(quantity, order_id, product_id) {
   try {
     console.log("Starting to create LineItems");
     // Check if the product exists
-    const product = await getProductById(productId);
+    const product = await getProductById(product_id);
     if (!product) {
       throw new Error("Product not found");
     }
@@ -17,7 +17,7 @@ async function createLineItem(quantity, orderId, productId) {
       VALUES ($1, $2, $3)
       RETURNING *;
       `,
-      [quantity, orderId, productId]
+      [quantity, order_id, product_id]
     );
     console.log("Created LineItem:", createdLineItem);
     return createdLineItem;

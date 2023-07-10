@@ -1,4 +1,4 @@
-export async function addLineItem(quantity, orderId, productId) {
+export async function addLineItem(quantity, order_id, product_id) {
   try {
     const response = await fetch(`/api/lineitems/`, {
       method: "POST",
@@ -8,8 +8,8 @@ export async function addLineItem(quantity, orderId, productId) {
       //may need authorization??
       body: JSON.stringify({
         quantity,
-        orderId,
-        productId,
+        order_id,
+        product_id,
       }),
     });
     const result = await response.json();
