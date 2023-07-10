@@ -1,15 +1,17 @@
 import react, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { fetchAllProducts } from "../../src/api/products";
+import { deleteProduct, fetchAllProducts } from "../../src/api/products";
 import { addLineItem } from "../../src/api/lineItems";
 import { createOrder } from "../../src/api/orders";
+import useAuth from "../../src/components/Auth/hooks/useAuth";
 import "../components/ProductsList.css";
+import { response } from "express";
 
 export function ProductsList() {
   const [products, setProducts] = useState([]);
-  const [quantity, setQuantity] = useState();
-  const [orderId, setOrderId] = useState();
+  const [quantity, setQuantity] = useState("");
   const { user } = useParams();
+  const { loggedIn } = useAuth();
 
   useEffect(() => {
     async function fetchProducts() {
@@ -23,23 +25,13 @@ export function ProductsList() {
     fetchProducts();
   }, []);
 
-  // useEffect(() => {
-  //   async function findOrderId() {
-  //     try {
-  //       if (user.order.status === false) {
-  //         setOrderId(order.id);
-  //       } else if (user.order.status === true) {
-  //         createOrder()
-  //       }
-  //     } catch (error) {}
-  //   }
-  // });
-
-  // async function handleClick(e) {
-  //   e.preventDefault();
+  // async function handleDelete(productId) {
   //   try {
-  //     const result = await addLineItem();
-  //   } catch (error) {}
+  //     const deleted = await deleteProduct(productId);
+  //     console.log(deleted);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
   // }
 
   return (
@@ -62,6 +54,17 @@ export function ProductsList() {
                   <Link to={`/products/${product.id}`}>
                     <button>See Details</button>
                   </Link>
+                  {/* logged in should be is admin*/}
+                  {loggedIn && (
+                    <button
+                      onClick={async () => {
+                        const deleted = await deleteProduct(product.id);
+                        console.log(deleted);
+                      }}
+                    >
+                      Delete
+                    </button>
+                  )}
                 </div>
               </div>
             );

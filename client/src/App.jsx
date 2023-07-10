@@ -9,6 +9,7 @@ import { AdminDashboard } from "./components/AdminDashboard";
 import useAuth from "./components/Auth/hooks/useAuth";
 import { logOut } from "./api/auth";
 import { MyProfile } from "./components/MyProfile";
+// import { checkAdmin } from "../../routes/utils";
 
 function App() {
   const { loggedIn, setLoggedIn, logout } = useAuth();
@@ -29,6 +30,7 @@ function App() {
           <Link to="/login">Login</Link>
           {loggedIn && <Link to="/my-profile">My Profile</Link>}
           <Link to="/products">All Products</Link>
+          {/* {checkAdmin && <Link to="/create-product">Admin Dashboard</Link>} */}
         </div>
         {loggedIn && (
           <button className="button" onClick={handleLogout}>
