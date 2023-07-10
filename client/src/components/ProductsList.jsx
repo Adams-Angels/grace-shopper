@@ -5,13 +5,13 @@ import { addLineItem } from "../../src/api/lineItems";
 import { createOrder } from "../../src/api/orders";
 import useAuth from "../../src/components/Auth/hooks/useAuth";
 import "../components/ProductsList.css";
-import { response } from "express";
+// import { response } from "express";
 
 export function ProductsList() {
   const [products, setProducts] = useState([]);
   const [quantity, setQuantity] = useState("");
   const { user } = useParams();
-  const { loggedIn } = useAuth();
+  // const { loggedIn } = useAuth();
 
   useEffect(() => {
     async function fetchProducts() {
