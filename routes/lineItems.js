@@ -28,8 +28,8 @@ lineItemRouter.get("/:id", async (req, res, next) => {
 
 lineItemRouter.post("/", async (req, res, next) => {
   try {
-    const { quantity, orderId, productId } = req.body;
-    const newLineItem = await createLineItem(quantity, orderId, productId);
+    const { quantity, order_id, product_id } = req.body;
+    const newLineItem = await createLineItem(quantity, order_id, product_id);
     res.send(newLineItem);
   } catch (error) {
     next(error);
