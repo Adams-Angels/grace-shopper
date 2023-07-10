@@ -1,4 +1,7 @@
+const client = require("../db/client");
 const lineItemRouter = require("express").Router();
+
+const { createOrders } = require("../db/adapters/order");
 const {
   getLineItemById,
   createLineItem,
@@ -28,9 +31,39 @@ lineItemRouter.get("/:id", async (req, res, next) => {
 
 lineItemRouter.post("/", async (req, res, next) => {
   try {
-    const { quantity, order_id, product_id } = req.body;
-    const newLineItem = await createLineItem(quantity, order_id, product_id);
-    res.send(newLineItem);
+    const { quantity, order_id, product_id, is_cart } = req.body;
+    const { user_id } = req.params;
+
+    let {
+      rows: [cart],
+    } = await client.query(
+      `select * from orders where user_id = $1 and is_cart = true`,
+      [req.params.id]
+    );
+    if (!cart) {
+      let {
+        rows: [cart],
+      } = await client.query(
+        ` INSERT INTO orders (user_id, is_cart)
+        VALUES ($1, $2)
+        RETURNING *`,
+        [user_id, is_cart]
+      );
+      res.send(cart);
+    }
+
+    let {
+      rows: [lineItem],
+    } = await client.query(
+      `select * from lineitems where order_id=$2 and product_id =$3`,
+      [req.lineitems.id]
+    );
+    if (!lineItem) {
+      let {
+        rows: [lineItems],
+      } = await createLineItem(quantity, order_id, product_id);
+      res.send(lineItems);
+    }
   } catch (error) {
     next(error);
   }
