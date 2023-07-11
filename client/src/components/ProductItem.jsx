@@ -1,22 +1,16 @@
 import { useState, useEffect } from "react";
 import { fetchProductById } from "../api/products";
-import {
-  addLineItem,
-  fetchLineItemsById,
-  updateLineItem,
-} from "../api/lineItems";
-import { createOrder, fetchOrders } from "../api/orders";
+import { addLineItem } from "../api/lineItems";
+
 import { useParams } from "react-router-dom";
-import { fetchOrderById } from "../api/orders";
 import useAuth from "./Auth/hooks/useAuth";
 
 export function ProductItem() {
   const [singleProduct, setSingleProduct] = useState(null);
   const [quantity, setQuantity] = useState(0);
-  const [cartId, setCartId] = useState();
+
   const { id } = useParams();
   const { user } = useAuth();
-  const [isCart, setIscart] = useState(true);
 
   console.log(singleProduct);
 
@@ -28,46 +22,14 @@ export function ProductItem() {
     getProduct();
   }, [id]);
 
-  const handleAddToCart = async () => {
+  async function handleAddToCart() {
     try {
-      const getOrderId = async () => {
-        //check if the user already has a cart order
-        const orders = await fetchOrders();
-        // const cartOrder = orders.find((order) => {
-        //   order.user_id === user.id && order.is_cart === true;
-        // }, console.log("cart order from product items", cartOrder));
-        // if (cartOrder !== undefined) {
-        //   return setCartId(cartOrder);
-        // } else {
-        //create a new cart order for the user
-        const newOrder = await createOrder(user.id, isCart);
-
-        console.log("new order from product items", newOrder);
-        return setCartId(newOrder);
-        // }
-      };
-      getOrderId();
-      // const orderId = await fetchOrderById(cartId);
-      // const lineItem = await fetchLineItemsById(orderId);
-      // if (lineItem) {
-      //   //ine item already exsists, update the quantity
-      //   const updatedLineItem = {
-      //     ...lineItem,
-      //     quantity: lineItem.quantity + 1,
-      //   };
-      // await updateLineItem(lineItem.id, updatedLineItem);
-      // } else {
-      //Line item doesn't exist, create a new one
-      await addLineItem(1, cartId, id);
-      console.log("Product added to cart successfully!");
-      // }
-
-      // Success! Show a message or error
-    } catch (error) {
-      //handle error
-      console.error("Error adding a product to cart:", error);
+      // Set the singleProduct.id, a quantity to our endpoint
+      await addLineItem(singleProduct.id);
+    } catch (err) {
+      console.error(err);
     }
-  };
+  }
 
   return (
     <div>
