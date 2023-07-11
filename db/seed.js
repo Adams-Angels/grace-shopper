@@ -37,7 +37,7 @@ async function createTables() {
     CREATE TABLE orders (
       id SERIAL PRIMARY KEY,
       user_id INTEGER REFERENCES users(id),
-      is_cart BOOLEAN DEFAULT FALSE
+      is_cart BOOLEAN DEFAULT TRUE
     );
      CREATE TABLE products (
       id SERIAL PRIMARY KEY,
