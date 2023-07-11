@@ -65,20 +65,34 @@ lineItemRouter.post("/", authRequired, async (req, res, next) => {
 
     console.log("Current Cart: ", currCart);
     // find lineitems if it exists update qty
+    let currLineItem;
     // let {
     //   rows: [lineItem],
     // } = await client.query(
     //   `select * from lineitems where order_id=$1 and product_id =$2`,
-    //   [currCart.id, product_id]
+    //   [currCart.id, product_id],
+    //   console.log("line item", lineItem)
     // );
-    // // if line items doesnt exist, create lineitem
-    // if (!lineItem) {
-    //   let {
-    //     rows: [lineItems],
-    //   } = await createLineItem(quantity, order_id, product_id);
-    //   res.send(lineItems);
+    // if (lineItem) {
+    //   currLineItem = lineItem;
     // }
-    // decide what we want to return to client
+    // // if line items doesnt exist, create lineitem
+    if (!lineItem) {
+      let {
+        rows: [lineItem],
+      } = await client.query(
+        `
+      INSERT INTO lineitems (quantity, order_id, product_id)
+      VALUES ($1, $2, $3)
+      RETURNING *`,
+        [quantity, currCart.id, product_id]
+      );
+      // res.send(lineItems);
+      console.log("lineitems", lineItem);
+      currLineItem = lineItem;
+      console.log("Current line item", currLineItem);
+    }
+    // // decide what we want to return to client
   } catch (error) {
     next(error);
   }
