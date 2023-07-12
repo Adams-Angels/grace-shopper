@@ -12,6 +12,7 @@ export function ProductsList() {
   const [quantity, setQuantity] = useState("");
   const { loggedIn, user } = useAuth();
   const navigate = useNavigate();
+
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -35,22 +36,9 @@ export function ProductsList() {
     }
   }
 
-  async function handleEdit(productId) {
-    try {
-      const edit = await updateProduct(
-        productId,
-        name,
-        description,
-        price,
-        image,
-        inventory,
-        category
-      );
-      setProducts(edit);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  const handleEdit = (productId) => {
+    navigate("/create-product");
+  };
 
   return (
     <div className="products-list">
