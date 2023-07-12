@@ -49,7 +49,7 @@ function App() {
           <Route path="/create-product" element={<AdminDashboard />} />
         )}
         {user.is_admin && (
-          <Route path="/edit-product" element={<EditProduct />} />
+          <Route path="/edit-product/:id" element={<EditProduct />} />
         )}
         <Route path="/my-profile" element={<MyProfile />} />
       </Routes>
