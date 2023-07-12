@@ -10,6 +10,7 @@ import useAuth from "./components/Auth/hooks/useAuth";
 import { logOut } from "./api/auth";
 import { MyProfile } from "./components/MyProfile";
 // import { checkAdmin } from "../../routes/utils";
+import { EditProduct } from "./components/EditProduct";
 
 function App() {
   const { user, loggedIn, setLoggedIn, logout } = useAuth();
@@ -44,9 +45,12 @@ function App() {
         <Route path="/login" element={<AuthForm />} />
         <Route path="/register" element={<AuthForm />} />
         <Route path="/products/:id" element={<ProductItem />} />
-        {user.is_admin &&
-          ((<Route path="/create-product" element={<AdminDashboard />} />),
-          (<Route path="/edit-product" element={<EditProduct />} />))}
+        {user.is_admin && (
+          <Route path="/create-product" element={<AdminDashboard />} />
+        )}
+        {user.is_admin && (
+          <Route path="/edit-product" element={<EditProduct />} />
+        )}
         <Route path="/my-profile" element={<MyProfile />} />
       </Routes>
     </div>
