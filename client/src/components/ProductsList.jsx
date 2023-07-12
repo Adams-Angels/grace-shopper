@@ -56,15 +56,18 @@ export function ProductsList() {
                   <Link to={`/products/${product.id}`}>
                     <button>See Details</button>
                   </Link>
-                  {loggedIn && user.isAdmin && (
-                    <button
-                      onClick={() => {
-                        handleDelete(product.id);
-                      }}
-                    >
-                      Delete
-                    </button>
-                  )}
+                  {loggedIn &&
+                    {
+                      /*user.is_admin &&*/
+                    }(
+                      <button
+                        onClick={() => {
+                          handleDelete(product.id);
+                        }}
+                      >
+                        Delete
+                      </button>
+                    )}
                 </div>
               </div>
             );
