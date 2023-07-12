@@ -75,19 +75,21 @@ lineItemRouter.post("/", authRequired, async (req, res, next) => {
     );
     if (lineItem) {
       currLineItem = lineItem;
-      console.log("line item", lineItem);
     }
-    // if (existingLineItem) {
-    //   // Update the quantity of the existing line item
-    //   const updatedLineItem = {
-    //     ...existingLineItem,
-    //     quantity: existingLineItem.quantity + quantity,
-    //   };
-    //   lineItem = await updateLineItem(existingLineItem.id, updatedLineItem);
-    // } else {
+    console.log("line item", lineItem);
+    if (lineItem) {
+      // Update the quantity of the existing line item
+      const updatedLineItem = {
+        ...lineItem,
+        quantity: lineItem.quantity + 1,
+      };
+      console.log("updated lineitem", updatedLineItem);
+      currLineItem = await updateLineItem(lineItem.id, updatedLineItem);
+    }
     // Create a new line item
 
     if (!lineItem) {
+      console.log("starting to create lineitem");
       try {
         let {
           rows: [lineItem],
@@ -95,12 +97,14 @@ lineItemRouter.post("/", authRequired, async (req, res, next) => {
           `INSERT INTO lineitems (quantity, order_id, product_id)
             VALUES ($1, $2, $3)
             RETURNING *`,
-          [quantity, currCart.id, product_id]
+          [1, currCart.id, product_id]
         );
         currLineItem = lineItem;
         console.log("new line item", lineItem);
       } catch (error) {
+        console.log("error");
         next(error);
+        return;
       }
     }
 

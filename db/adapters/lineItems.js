@@ -122,8 +122,8 @@ async function updateLineItem(id, { quantity }) {
     } = await client.query(
       `
       UPDATE lineitems
-      SET quantity = $2,
-      WHERE id = $1,
+      SET quantity = $2
+      WHERE id = $1
       RETURNING *;
       `,
       [id, quantity]

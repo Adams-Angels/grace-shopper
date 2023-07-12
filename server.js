@@ -28,7 +28,14 @@ server.use("/api", require("./routes"));
 // });
 
 server.use((err, req, res, next) => {
+  res.status(500);
   res.send({
+    success: false,
+    message: err.message,
+    name: err.name,
+    stack: err.stack,
+  });
+  console.error({
     success: false,
     message: err.message,
     name: err.name,
