@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { updateProduct } from "../api/products";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export function EditProduct() {
   const [name, setName] = useState("");
@@ -12,10 +12,12 @@ export function EditProduct() {
   const [product, setProduct] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { id } = useParams();
 
   async function handleSubmit() {
     try {
       const newProduct = await updateProduct(
+        id,
         name,
         description,
         price,
