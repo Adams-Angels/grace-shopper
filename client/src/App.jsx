@@ -19,7 +19,7 @@ function App() {
     e.preventDefault();
     await logOut();
     setLoggedIn(false);
-    navigate("/");
+    window.location.href = "/";
   };
   return (
     <div>
