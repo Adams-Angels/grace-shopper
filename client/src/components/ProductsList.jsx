@@ -37,7 +37,7 @@ export function ProductsList() {
   }
 
   const handleEdit = (productId) => {
-    navigate("/create-product");
+    navigate("/edit-product");
   };
 
   return (
