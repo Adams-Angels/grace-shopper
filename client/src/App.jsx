@@ -12,7 +12,7 @@ import { MyProfile } from "./components/MyProfile";
 // import { checkAdmin } from "../../routes/utils";
 
 function App() {
-  const { loggedIn, setLoggedIn, logout } = useAuth();
+  const { user, loggedIn, setLoggedIn, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = async (e) => {
@@ -30,7 +30,7 @@ function App() {
           <Link to="/login">Login</Link>
           {loggedIn && <Link to="/my-profile">My Profile</Link>}
           <Link to="/products">All Products</Link>
-          {/* {checkAdmin && <Link to="/create-product">Admin Dashboard</Link>} */}
+          {user.is_admin && <Link to="/create-product">Admin Dashboard</Link>}
         </div>
         {loggedIn && (
           <button className="button" onClick={handleLogout}>
@@ -44,7 +44,9 @@ function App() {
         <Route path="/login" element={<AuthForm />} />
         <Route path="/register" element={<AuthForm />} />
         <Route path="/products/:id" element={<ProductItem />} />
-        <Route path="/create-product" element={<AdminDashboard />} />
+        {user.is_admin && (
+          <Route path="/create-product" element={<AdminDashboard />} />
+        )}
         <Route path="/my-profile" element={<MyProfile />} />
       </Routes>
     </div>
