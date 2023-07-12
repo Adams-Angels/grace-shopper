@@ -2,6 +2,7 @@ import { useState } from "react";
 import { registerUser, loginUser } from "../api/auth";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import useAuth from "../components/Auth/hooks/useAuth";
+import "../components/AuthForm.css";
 
 export function AuthForm() {
   const [username, setUsername] = useState("");
@@ -33,8 +34,8 @@ export function AuthForm() {
     }
   }
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="auth-form-div">
+      <form className="auth-form" onSubmit={handleSubmit}>
         {pathname === "/login" ? (
           <h2>
             Login or
