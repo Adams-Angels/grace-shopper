@@ -10,8 +10,7 @@ import "../components/ProductsList.css";
 export function ProductsList() {
   const [products, setProducts] = useState([]);
   const [quantity, setQuantity] = useState("");
-  const { user } = useParams();
-  const { loggedIn } = useAuth();
+  const { loggedIn, user } = useAuth();
 
   useEffect(() => {
     fetchProducts();
@@ -56,7 +55,7 @@ export function ProductsList() {
                   <Link to={`/products/${product.id}`}>
                     <button>See Details</button>
                   </Link>
-                  {loggedIn && (
+                  {user.is_admin && (
                     <button
                       onClick={() => {
                         handleDelete(product.id);
