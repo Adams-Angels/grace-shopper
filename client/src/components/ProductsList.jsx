@@ -11,7 +11,7 @@ export function ProductsList() {
   const [products, setProducts] = useState([]);
   const [quantity, setQuantity] = useState("");
   const { loggedIn, user } = useAuth();
-
+  const navigate = useNavigate();
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -30,6 +30,23 @@ export function ProductsList() {
       const deleted = await deleteProduct(productId);
       console.log(deleted);
       fetchProducts();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function handleEdit(productId) {
+    try {
+      const edit = await updateProduct(
+        productId,
+        name,
+        description,
+        price,
+        image,
+        inventory,
+        category
+      );
+      setProducts(edit);
     } catch (error) {
       console.error(error);
     }
@@ -56,13 +73,22 @@ export function ProductsList() {
                     <button>See Details</button>
                   </Link>
                   {user.is_admin && (
-                    <button
-                      onClick={() => {
-                        handleDelete(product.id);
-                      }}
-                    >
-                      Delete
-                    </button>
+                    <div>
+                      <button
+                        onClick={() => {
+                          handleDelete(product.id);
+                        }}
+                      >
+                        Delete
+                      </button>
+                      <button
+                        onClick={() => {
+                          handleEdit(product.id);
+                        }}
+                      >
+                        Edit
+                      </button>
+                    </div>
                   )}
                 </div>
               </div>
