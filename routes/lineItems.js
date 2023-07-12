@@ -65,34 +65,46 @@ lineItemRouter.post("/", authRequired, async (req, res, next) => {
 
     console.log("Current Cart: ", currCart);
     // find lineitems if it exists update qty
+
     let currLineItem;
-    // let {
-    //   rows: [lineItem],
-    // } = await client.query(
-    //   `select * from lineitems where order_id=$1 and product_id =$2`,
-    //   [currCart.id, product_id],
-    //   console.log("line item", lineItem)
-    // );
-    // if (lineItem) {
-    //   currLineItem = lineItem;
-    // }
-    // // if line items doesnt exist, create lineitem
-    if (!lineItem) {
-      let {
-        rows: [lineItem],
-      } = await client.query(
-        `
-      INSERT INTO lineitems (quantity, order_id, product_id)
-      VALUES ($1, $2, $3)
-      RETURNING *`,
-        [quantity, currCart.id, product_id]
-      );
-      // res.send(lineItems);
-      console.log("lineitems", lineItem);
+    let {
+      rows: [lineItem],
+    } = await client.query(
+      `SELECT * FROM lineitems WHERE order_id = $1 AND product_id = $2`,
+      [currCart.id, product_id]
+    );
+    if (lineItem) {
       currLineItem = lineItem;
-      console.log("Current line item", currLineItem);
+      console.log("line item", lineItem);
     }
-    // // decide what we want to return to client
+    // if (existingLineItem) {
+    //   // Update the quantity of the existing line item
+    //   const updatedLineItem = {
+    //     ...existingLineItem,
+    //     quantity: existingLineItem.quantity + quantity,
+    //   };
+    //   lineItem = await updateLineItem(existingLineItem.id, updatedLineItem);
+    // } else {
+    // Create a new line item
+
+    if (!lineItem) {
+      try {
+        let {
+          rows: [lineItem],
+        } = await client.query(
+          `INSERT INTO lineitems (quantity, order_id, product_id)
+            VALUES ($1, $2, $3)
+            RETURNING *`,
+          [quantity, currCart.id, product_id]
+        );
+        currLineItem = lineItem;
+        console.log("new line item", lineItem);
+      } catch (error) {
+        next(error);
+      }
+    }
+
+    res.send(lineItem);
   } catch (error) {
     next(error);
   }
