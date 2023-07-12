@@ -14,25 +14,27 @@ export function ProductsList() {
   const { loggedIn } = useAuth();
 
   useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const fetchedProducts = await fetchAllProducts();
-        setProducts(fetchedProducts);
-      } catch (error) {
-        console.log(error);
-      }
-    }
     fetchProducts();
   }, []);
 
-  // async function handleDelete(productId) {
-  //   try {
-  //     const deleted = await deleteProduct(productId);
-  //     console.log(deleted);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
+  async function fetchProducts() {
+    try {
+      const fetchedProducts = await fetchAllProducts();
+      setProducts(fetchedProducts);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function handleDelete(productId) {
+    try {
+      const deleted = await deleteProduct(productId);
+      console.log(deleted);
+      fetchProducts();
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div className="products-list">
@@ -54,12 +56,10 @@ export function ProductsList() {
                   <Link to={`/products/${product.id}`}>
                     <button>See Details</button>
                   </Link>
-                  {/* logged in should be is admin*/}
-                  {loggedIn && (
+                  {loggedIn && user.isAdmin && (
                     <button
-                      onClick={async () => {
-                        const deleted = await deleteProduct(product.id);
-                        console.log(deleted);
+                      onClick={() => {
+                        handleDelete(product.id);
                       }}
                     >
                       Delete
