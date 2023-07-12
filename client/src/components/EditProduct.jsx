@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { updateProduct } from "../api/products";
+import { updateProduct, fetchProductById } from "../api/products";
 import { useNavigate, useParams } from "react-router-dom";
 
 export function EditProduct() {
@@ -13,6 +13,14 @@ export function EditProduct() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
+
+  useEffect(() => {
+    async function getProduct() {
+      const product = await fetchProductById(id);
+      setProduct(product.productById);
+    }
+    getProduct();
+  }, [id]);
 
   async function handleSubmit() {
     try {
