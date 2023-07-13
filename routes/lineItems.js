@@ -30,85 +30,79 @@ lineItemRouter.get("/:id", async (req, res, next) => {
   }
 });
 
+//Get cart for current user
+//or create cart for user if no cart
+//Check if lineitem exists
+//If it exists, update quantity
+//if it doesn't exist create a new lineitem
+//send lineitem as response
+
+async function findOrCreateCartForUser(userId) {
+  let {
+    rows: [foundCart],
+  } = await client.query(
+    `select * from orders where user_id = $1 and is_cart = true`,
+    [userId]
+  );
+  if (foundCart) {
+    return foundCart;
+  }
+  // //if there is no order create order
+
+  let {
+    rows: [createdCart],
+  } = await client.query(
+    `INSERT INTO orders (user_id)
+           VALUES ($1)
+           RETURNING * `,
+    [userId]
+  );
+  return createdCart;
+}
+
+async function updateOrCreateLineItem(orderId, productId) {
+  let {
+    rows: [foundLineItem],
+  } = await client.query(
+    `SELECT * FROM lineitems WHERE order_id = $1 AND product_id = $2`,
+    [orderId, productId]
+  );
+  console.log("line item", foundLineItem);
+  if (foundLineItem) {
+    // Update the quantity of the existing line item
+    const updatedLineItem = {
+      ...foundLineItem,
+      quantity: foundLineItem.quantity + 1,
+    };
+    console.log("updated lineitem", updatedLineItem);
+    return await updateLineItem(foundLineItem.id, updatedLineItem);
+  }
+  // Create a new line item
+
+  console.log("starting to create lineitem");
+
+  let {
+    rows: [createdLineItem],
+  } = await client.query(
+    `INSERT INTO lineitems (quantity, order_id, product_id)
+          VALUES ($1, $2, $3)
+          RETURNING *`,
+    [1, orderId, productId]
+  );
+  console.log("new line item", createdLineItem);
+  return createdLineItem;
+}
+
 lineItemRouter.post("/", authRequired, async (req, res, next) => {
   try {
     const { product_id } = req.body;
-    const { id } = req.user;
-    // find order if it exists
-    let currCart;
-    let {
-      rows: [cart],
-    } = await client.query(
-      `select * from orders where user_id = $1 and is_cart = true`,
-      [id]
-    );
-    if (cart) {
-      currCart = cart;
-    }
-    // //if there is no order create order
-    if (!cart) {
-      try {
-        let {
-          rows: [cart],
-        } = await client.query(
-          `INSERT INTO orders (user_id)
-           VALUES ($1)
-           RETURNING * `,
-          [id]
-        );
-        currCart = cart;
-      } catch (error) {
-        next(error);
-        return;
-      }
-    }
-
+    const currCart = await findOrCreateCartForUser(req.user.id);
+    const currLineItem = await updateOrCreateLineItem(currCart.id, product_id);
     console.log("Current Cart: ", currCart);
+    console.log("Current Line Item", currLineItem);
     // find lineitems if it exists update qty
 
-    let currLineItem;
-    let {
-      rows: [lineItem],
-    } = await client.query(
-      `SELECT * FROM lineitems WHERE order_id = $1 AND product_id = $2`,
-      [currCart.id, product_id]
-    );
-    if (lineItem) {
-      currLineItem = lineItem;
-    }
-    console.log("line item", lineItem);
-    if (lineItem) {
-      // Update the quantity of the existing line item
-      const updatedLineItem = {
-        ...lineItem,
-        quantity: lineItem.quantity + 1,
-      };
-      console.log("updated lineitem", updatedLineItem);
-      currLineItem = await updateLineItem(lineItem.id, updatedLineItem);
-    }
-    // Create a new line item
-
-    if (!lineItem) {
-      console.log("starting to create lineitem");
-      try {
-        let {
-          rows: [lineItem],
-        } = await client.query(
-          `INSERT INTO lineitems (quantity, order_id, product_id)
-            VALUES ($1, $2, $3)
-            RETURNING *`,
-          [1, currCart.id, product_id]
-        );
-        currLineItem = lineItem;
-        console.log("new line item", lineItem);
-      } catch (error) {
-        console.log("error");
-        next(error);
-        return;
-      }
-    }
-
-    res.send(lineItem);
+    res.send(currLineItem);
   } catch (error) {
     next(error);
   }
