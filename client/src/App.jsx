@@ -60,6 +60,7 @@ function App() {
           <Route path="/edit-product/:id" element={<EditProduct />} />
         )}
         <Route path="/my-profile" element={<MyProfile />} />
+        <Route path="/my-cart/:id" element={<Cart />} />
       </Routes>
       <footer>
         <div className="facebook">
