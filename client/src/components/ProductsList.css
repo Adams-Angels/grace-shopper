@@ -45,3 +45,28 @@
   justify-content: space-evenly;
   font-family: "Montserrat", sans-serif;
 }
+
+.product-item .product-info button {
+  background-color: #6ba368;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease-in-out;
+  margin-top: 3px;
+  margin-right: 3px;
+}
+
+.product-item .product-info button:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.product-item .product-info button:focus {
+  outline: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
