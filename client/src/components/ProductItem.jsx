@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchProductById } from "../api/products";
 import { addLineItem } from "../api/lineItems";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "./Auth/hooks/useAuth";
 import "../components/ProductItem.css";
 
@@ -10,6 +10,7 @@ export function ProductItem() {
   const [quantity, setQuantity] = useState(0);
   const { id } = useParams();
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getProduct() {
@@ -23,6 +24,7 @@ export function ProductItem() {
     try {
       // Set the singleProduct.id, a quantity to our endpoint
       await addLineItem(singleProduct.id);
+      navigate(`/my-profile/`);
     } catch (err) {
       console.error(err);
     }
