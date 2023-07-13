@@ -11,6 +11,7 @@ import { logOut } from "./api/auth";
 import { MyProfile } from "./components/MyProfile";
 // import { checkAdmin } from "../../routes/utils";
 import { EditProduct } from "./components/EditProduct";
+import { Cart } from "./components/Cart";
 
 function App() {
   const { user, loggedIn, setLoggedIn, logout } = useAuth();
