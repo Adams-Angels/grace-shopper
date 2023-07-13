@@ -1,6 +1,9 @@
 .title {
   font-family: "Caprasimo", cursive;
+  text-shadow: 2px 4px 4px rgba(46, 91, 173, 0.6);
   color: #e1fab6;
+  display: flex;
+  justify-content: center;
 }
 
 .links {
@@ -11,10 +14,54 @@
 
 .image {
   height: 700px;
+  border-radius: 15px;
 }
 
 .header {
   background-color: #6ba368;
   padding-bottom: 20px;
   margin-bottom: 50px;
+  border-radius: 15px;
+}
+
+.frog-image {
+  width: 35px;
+  padding: 5px;
+}
+
+footer {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  background-color: #6ba368;
+  height: 100px;
+  padding-bottom: 20px;
+  margin-top: 50px;
+  border-radius: 15px;
+}
+
+.facebook {
+  height: 50px;
+  display: flex;
+  justify-content: end;
+  align-self: center;
+  grid-area: 1 / 1 / 2 / 3;
+}
+
+.instagram {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  grid-area: 1 / 3 / 2 / 5;
+}
+
+.twitter {
+  height: 50px;
+  display: flex;
+  justify-content: start;
+  align-self: center;
+  grid-area: 1 / 5 / 2 / 7;
 }

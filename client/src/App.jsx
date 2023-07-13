@@ -25,7 +25,15 @@ function App() {
   return (
     <div>
       <header className="header">
-        <h1 className="title">All Things Frog</h1>
+        <h1 className="title">
+          All Things Frog
+          <img
+            className="frog-image"
+            src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTVjanNxZGVxN3FyNDVxc2x0b3kybGE2d3hnYm5jbXY0YzA4MDl4byZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/110PcbFiaJOHsjGkSS/giphy.gif"
+            alt="frog icon"
+          />
+        </h1>
+
         <div className="links">
           <Link to="/">Home</Link>
           <Link to="/login">Login</Link>
@@ -53,6 +61,27 @@ function App() {
         )}
         <Route path="/my-profile" element={<MyProfile />} />
       </Routes>
+      <footer>
+        <div className="facebook">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/4494/4494464.png"
+            alt="facebook logo"
+          />
+        </div>
+
+        <div className="instagram">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/3670/3670274.png"
+            alt="instagram logo"
+          />
+        </div>
+        <div className="twitter">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/4902/4902532.png"
+            alt="twitter logo"
+          />
+        </div>
+      </footer>
     </div>
   );
 }
