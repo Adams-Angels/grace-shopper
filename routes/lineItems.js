@@ -24,6 +24,7 @@ lineItemRouter.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const lineItem = await getLineItemById(id);
+    console.log("Retrieved Line Item:", lineItem);
     res.send(lineItem);
   } catch (error) {
     next(error);

@@ -16,6 +16,7 @@ export function Cart() {
   async function getCart() {
     try {
       const lineItemsById = await fetchLineItemsById(id);
+      console.log("lineItemsById", lineItemsById);
       setCart(lineItemsById);
       console.log("id", id);
       console.log("cart from cart", cart);
@@ -32,12 +33,16 @@ export function Cart() {
   return (
     <div>
       <h3>Cart</h3>
-      {/* <div>
-        {cart.line_items &&
-          cart.line_items.map((lineItem) => {
-            return <p> {lineItem.product_name}</p>;
-          })}
-      </div> */}
+      {/* {cart.line_items && cart.line_items.length > 0 ? (
+        <ul>
+          {cart.line_items.map((lineItem) => (
+            <li key={lineItem.lineitem_id}>
+              {lineItem.quantity} x {lineItem.product_name}
+            </li>
+          ))}
+        </ul>) 
+        :  */}
+      (<p>Your cart is empty.</p>)
     </div>
   );
 }
