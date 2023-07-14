@@ -41,7 +41,17 @@ export async function fetchOrderById(orderId) {
     console.error(error);
   }
 }
-
+export async function fetchCart() {
+  try {
+    const response = await fetch("/api/orders/cart");
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
 export async function updateOrder(orderId, is_cart) {
   try {
     const response = await fetch(`/api/orders/${orderId}`, {

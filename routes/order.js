@@ -5,6 +5,7 @@ const {
   getAllOrders,
   destroyOrder,
   updateOrders,
+  getCartByUserId,
 } = require("../db/adapters/order");
 const { authRequired } = require("./utils");
 
@@ -28,7 +29,16 @@ ordersRouter.post("/create-order", async (req, res, next) => {
     next(error);
   }
 });
-
+// api/orders/cart
+ordersRouter.get("/cart", authRequired, async (req, res, next) => {
+  try {
+    const cart = await getCartByUserId(req.user.id);
+    console.log("cart from route", cart);
+    res.send(cart);
+  } catch (error) {
+    next(error);
+  }
+});
 // api/orders/id
 
 ordersRouter.get("/:id", async (req, res, next) => {

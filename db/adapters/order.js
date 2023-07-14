@@ -36,7 +36,44 @@ async function getOrderById(id) {
     throw error;
   }
 }
+async function getCartByUserId(userId) {
+  const {
+    rows: [cart],
+  } = await client.query(
+    `SELECT 
+	
+ JSON_BUILD_OBJECT (
+      'id', orders.id,
+      'is_cart', orders.is_cart,
+      'user_id', orders.user_id,
+      'line_items',
+       COALESCE((
+      
+     
+        SELECT JSON_AGG(
+          JSON_BUILD_OBJECT(
+            'lineitem_id', lineitems.id ,
+            'quantity', lineitems.quantity,
+             'product_id', products.id,
+             'total_price', lineitems.quantity * products.price,
+             'product_name', products.name,
+             'products_img', products.image
+          )
+        )
+        From lineitems
+        left join products
+      on lineitems.product_id = products.id
+      where lineitems.order_id = orders.id
+     ), '[]')
+ )
 
+
+FROM orders
+where orders.user_id = $1 and orders.is_cart = true`,
+    [userId]
+  );
+  return cart.json_build_object;
+}
 async function getAllOrders() {
   try {
     console.log("getting all orders");
@@ -89,5 +126,6 @@ module.exports = {
   getOrderById,
   getAllOrders,
   updateOrders,
+  getCartByUserId,
   destroyOrder,
 };
