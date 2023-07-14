@@ -32,12 +32,12 @@ export function Cart() {
   return (
     <div>
       <h3>Cart</h3>
-      <div>
+      {/* <div>
         {cart.line_items &&
           cart.line_items.map((lineItem) => {
             return <p> {lineItem.product_name}</p>;
           })}
-      </div>
+      </div> */}
     </div>
   );
 }

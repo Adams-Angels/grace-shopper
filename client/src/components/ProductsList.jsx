@@ -12,6 +12,7 @@ export function ProductsList() {
   const [quantity, setQuantity] = useState("");
   const { loggedIn, user } = useAuth();
   const navigate = useNavigate();
+  const [searchProducts, setSearchProducts] = useState("");
 
   useEffect(() => {
     fetchProducts();
@@ -40,13 +41,69 @@ export function ProductsList() {
     navigate(`/edit-product/${productId}`);
   };
 
+  const filteredProducts = products.filter((product) => {
+    return (
+      product.name.toLowerCase().includes(searchProducts) ||
+      product.price.toLowerCase().includes(searchProducts) ||
+      product.category.toLowerCase().includes(searchProducts)
+    );
+  });
+  console.log("filtered products", filteredProducts);
+
   return (
     <div className="products-list">
       <h2>Products List</h2>
+      <input
+        type="text"
+        placeholder="search froggy products"
+        onChange={(e) => {
+          setSearchProducts(e.target.value.toLowerCase());
+          console.log(searchProducts);
+        }}
+      />
       <div className="product-grid">
         {console.log(products)}
         {products.length > 0 &&
+          !searchProducts &&
           products.map((product) => {
+            return (
+              <div className="product-item" key={product.id}>
+                <Link to={`/products/${product.id}`}>
+                  <div className="product-image">
+                    <img src={product.image} alt={product.name} />
+                  </div>
+                </Link>
+                <h3>{product.name}</h3>
+                <div className="product-info">
+                  <p>${product.price}</p>
+                  <Link to={`/products/${product.id}`}>
+                    <button>See Details</button>
+                  </Link>
+                  {user.is_admin && (
+                    <div>
+                      <button
+                        onClick={() => {
+                          handleDelete(product.id);
+                        }}
+                      >
+                        Delete
+                      </button>
+                      <button
+                        onClick={() => {
+                          handleEdit(product.id);
+                        }}
+                      >
+                        Edit
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        {products.length > 0 &&
+          searchProducts &&
+          filteredProducts.map((product) => {
             return (
               <div className="product-item" key={product.id}>
                 <Link to={`/products/${product.id}`}>
