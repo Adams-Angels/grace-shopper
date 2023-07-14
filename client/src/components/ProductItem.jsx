@@ -24,7 +24,7 @@ export function ProductItem() {
     try {
       // Set the singleProduct.id, a quantity to our endpoint
       await addLineItem(singleProduct.id);
-      navigate(`/my-cart/${id}`);
+      navigate(`/my-cart/${singleProduct.id}`);
     } catch (err) {
       console.error(err);
     }
