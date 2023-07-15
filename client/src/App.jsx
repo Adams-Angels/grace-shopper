@@ -41,10 +41,11 @@ function App() {
           {loggedIn && <Link to="/my-profile">My Profile</Link>}
           <Link to="/products">All Products</Link>
           {user.is_admin && <Link to="/create-product">Admin Dashboard</Link>}
-
-          <NavLink to="/my-cart/:id" className="nav-link">
-            <i className="material-icons">shopping_cart</i>
-          </NavLink>
+          {loggedIn && (
+            <NavLink to="/my-cart/:id" className="nav-link">
+              <i className="material-icons">shopping_cart</i>
+            </NavLink>
+          )}
         </div>
         {loggedIn && (
           <button className="button" onClick={handleLogout}>
