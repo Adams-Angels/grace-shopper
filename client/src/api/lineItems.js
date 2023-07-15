@@ -62,9 +62,9 @@ export async function updateLineItem(id, updatedLineItem) {
   }
 }
 
-export async function deleteLineItem(id) {
+export async function deleteLineItem(lineItemId) {
   try {
-    const response = await fetch(`/api/lineitems/${id}`, {
+    const response = await fetch(`/api/lineitems/${lineItemId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
