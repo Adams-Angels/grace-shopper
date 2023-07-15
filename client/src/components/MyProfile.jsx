@@ -6,7 +6,7 @@ export function MyProfile() {
   return (
     <div>
       <h3>Welcome, {user.username}</h3>
-      {/* <Cart /> */}
+      <Cart />
     </div>
   );
 }
