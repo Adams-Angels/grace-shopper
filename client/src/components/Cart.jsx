@@ -1,4 +1,4 @@
-import { fetchLineItemsById } from "../api/lineItems";
+import { fetchLineItemsById, updateLineItem } from "../api/lineItems";
 import useAuth from "./Auth/hooks/useAuth";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -7,6 +7,7 @@ import { fetchCart } from "../api/orders";
 export function Cart() {
   const [cart, setCart] = useState({});
   const [lineItems, setLineItems] = useState();
+  const [quantity, setQuantity] = useState();
   const { user } = useAuth();
   const { id } = useParams();
 
@@ -21,12 +22,10 @@ export function Cart() {
     }
     getCart();
   }, []);
-  console.log("cart from cart", cart);
-  // const lineItemById = await fetchLineItemsById(id);
-  // setCart(lineItemById);
-  // setLineItems(lineItemById.line_items);
-  // console.log("lineItemsById from cart", lineItemById);
-  // console.log("cart from cart", cart);
+
+  // async function updateCart() {
+  //   const updatedCart = await updateLineItem(lineItems.quantity);
+  // }
 
   return (
     <div>
@@ -35,7 +34,21 @@ export function Cart() {
         <ul>
           {cart.line_items.map((lineItem) => (
             <li key={lineItem.lineitem_id}>
-              {lineItem.quantity} x {lineItem.product_name}
+              {lineItem.quantity} x {lineItem.product_name} x{" "}
+              {lineItem.total_price}
+              <button
+                value={quantity}
+                onClick={async (e) => {
+                  e.preventDefault();
+                  const updateCart = await updateLineItem(
+                    user.id,
+                    lineItem.quantity
+                  );
+                  setQuantity(updateCart);
+                }}
+              >
+                remove
+              </button>
             </li>
           ))}
         </ul>
