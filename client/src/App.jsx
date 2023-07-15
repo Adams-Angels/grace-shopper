@@ -9,9 +9,9 @@ import { AdminDashboard } from "./components/AdminDashboard";
 import useAuth from "./components/Auth/hooks/useAuth";
 import { logOut } from "./api/auth";
 import { MyProfile } from "./components/MyProfile";
-// import { checkAdmin } from "../../routes/utils";
 import { EditProduct } from "./components/EditProduct";
 import { Cart } from "./components/Cart";
+import { Confirmation } from "./components/Confirmation";
 
 function App() {
   const { user, loggedIn, setLoggedIn, logout } = useAuth();
@@ -65,6 +65,7 @@ function App() {
         {user.is_admin && (
           <Route path="/edit-product/:id" element={<EditProduct />} />
         )}
+        <Route path="/confirmation" element={<Confirmation />} />
         <Route path="/my-profile" element={<MyProfile />} />
         <Route path="/my-cart/:id" element={<Cart />} />
       </Routes>

@@ -1,6 +1,6 @@
 import useAuth from "./Auth/hooks/useAuth";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { fetchCart } from "../api/orders";
 import { deleteLineItem, updateLineItem } from "../api/lineItems";
 import "../components/components css/Cart.css";
@@ -11,6 +11,7 @@ export function Cart() {
   const [quantity, setQuantity] = useState();
   const { user } = useAuth();
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getCart() {
@@ -108,6 +109,13 @@ export function Cart() {
       ) : (
         <p>Your cart is empty.</p>
       )}
+      <button
+        onClick={() => {
+          navigate("/confirmation");
+        }}
+      >
+        Place your order{" "}
+      </button>
     </div>
   );
 }

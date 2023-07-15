@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { updateProduct, fetchProductById } from "../api/products";
 import { useNavigate, useParams } from "react-router-dom";
-
+import "../components/components css/AdminDashboard.css";
 export function EditProduct() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -44,6 +44,7 @@ export function EditProduct() {
     <div className="admin-page">
       <h1>Edit Product</h1>
       <form
+        className="create-product"
         onSubmit={(e) => {
           e.preventDefault(), handleSubmit();
         }}
@@ -102,7 +103,7 @@ export function EditProduct() {
           }}
         />
 
-        <button type="submit">Create Product</button>
+        <button type="submit">Edit Product</button>
       </form>
     </div>
   );
