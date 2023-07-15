@@ -4,7 +4,7 @@ import { deleteProduct, fetchAllProducts } from "../../src/api/products";
 import { addLineItem } from "../../src/api/lineItems";
 import { createOrder } from "../../src/api/orders";
 import useAuth from "../../src/components/Auth/hooks/useAuth";
-import "../components/ProductsList.css";
+import "../components/components css/ProductsList.css";
 // import { response } from "express";
 
 export function ProductsList() {

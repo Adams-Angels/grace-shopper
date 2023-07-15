@@ -29,6 +29,18 @@
   padding: 5px;
 }
 
+.cart-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
+
+.nav-link {
+  color: #000;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
 footer {
   display: grid;
   grid-template-columns: repeat(6, 1fr);

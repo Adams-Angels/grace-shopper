@@ -1,9 +1,9 @@
-import { fetchLineItemsById, updateLineItem } from "../api/lineItems";
 import useAuth from "./Auth/hooks/useAuth";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchCart } from "../api/orders";
 import { deleteLineItem } from "../api/lineItems";
+import "../components/components css/Cart.css";
 
 export function Cart() {
   const [cart, setCart] = useState({});
@@ -27,7 +27,6 @@ export function Cart() {
   async function handleRemoveFromCart(lineItemId) {
     try {
       await deleteLineItem(lineItemId);
-      // After successfully removing the line item, update the cart state accordingly
       setCart((prevCart) => ({
         ...prevCart,
         line_items: prevCart.line_items.filter(
@@ -38,9 +37,6 @@ export function Cart() {
       console.log(error);
     }
   }
-  // async function updateCart() {
-  //   const updatedCart = await updateLineItem(lineItems.quantity);
-  // }
 
   return (
     <div>
@@ -48,10 +44,16 @@ export function Cart() {
       {cart.line_items && cart.line_items.length > 0 ? (
         <ul>
           {cart.line_items.map((lineItem) => (
-            <li key={lineItem.lineitem_id}>
-              {lineItem.quantity} x {lineItem.product_name} x{" "}
-              {lineItem.total_price}
+            <li className="cart-item" key={lineItem.lineitem_id}>
+              <div className="cart-item-details">
+                <div className="cart-item-quantity">{lineItem.quantity} x</div>
+                <div className="cart-item-name">{lineItem.product_name}</div>
+                <div className="cart-item-total-price">
+                  ${lineItem.total_price}
+                </div>
+              </div>
               <button
+                className="cart-item-remove-button"
                 onClick={() => handleRemoveFromCart(lineItem.lineitem_id)}
               >
                 Remove
