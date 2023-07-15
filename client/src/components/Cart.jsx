@@ -93,7 +93,7 @@ export function Cart() {
                 </div>
                 <div className="cart-item-name">{lineItem.product_name}</div>
                 <div className="cart-item-total-price">
-                  {lineItem.total_price}
+                  ${lineItem.total_price}
                 </div>
               </div>
               <button
