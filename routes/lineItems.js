@@ -132,4 +132,6 @@ lineItemRouter.delete("/:id", async (req, res, next) => {
   }
 });
 
-module.exports = lineItemRouter;
+(module.exports = lineItemRouter),
+  updateOrCreateLineItem,
+  findOrCreateCartForUser;

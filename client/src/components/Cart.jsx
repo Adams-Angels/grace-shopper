@@ -2,7 +2,7 @@ import useAuth from "./Auth/hooks/useAuth";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchCart } from "../api/orders";
-import { deleteLineItem } from "../api/lineItems";
+import { deleteLineItem, updateLineItem } from "../api/lineItems";
 import "../components/components css/Cart.css";
 
 export function Cart() {
@@ -38,6 +38,26 @@ export function Cart() {
     }
   }
 
+  async function handleQuantityChange(lineItemId, newQuantity) {
+    try {
+      await updateLineItem(lineItemId, newQuantity);
+      setCart((prevCart) => ({
+        ...prevCart,
+        line_items: prevCart.line_items.map((lineItem) => {
+          if (lineItem.lineitem_id === lineItemId) {
+            return {
+              ...lineItem,
+              quantity: newQuantity,
+            };
+          }
+          return lineItem;
+        }),
+      }));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div>
       <h3>Cart</h3>
@@ -46,10 +66,34 @@ export function Cart() {
           {cart.line_items.map((lineItem) => (
             <li className="cart-item" key={lineItem.lineitem_id}>
               <div className="cart-item-details">
-                <div className="cart-item-quantity">{lineItem.quantity} x</div>
+                <div className="cart-item-quantity">
+                  <button
+                    className="quantity-button"
+                    onClick={() =>
+                      handleQuantityChange(
+                        lineItem.lineitem_id,
+                        lineItem.quantity - 1
+                      )
+                    }
+                  >
+                    -
+                  </button>
+                  <span className="quantity">{lineItem.quantity}</span>
+                  <button
+                    className="quantity-button"
+                    onClick={() =>
+                      handleQuantityChange(
+                        lineItem.lineitem_id,
+                        lineItem.quantity + 1
+                      )
+                    }
+                  >
+                    +
+                  </button>
+                </div>
                 <div className="cart-item-name">{lineItem.product_name}</div>
                 <div className="cart-item-total-price">
-                  ${lineItem.total_price}
+                  {lineItem.total_price}
                 </div>
               </div>
               <button
