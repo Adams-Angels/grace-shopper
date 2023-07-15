@@ -3,6 +3,7 @@ import useAuth from "./Auth/hooks/useAuth";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchCart } from "../api/orders";
+import { deleteLineItem } from "../api/lineItems";
 
 export function Cart() {
   const [cart, setCart] = useState({});
@@ -23,6 +24,20 @@ export function Cart() {
     getCart();
   }, []);
 
+  async function handleRemoveFromCart(lineItemId) {
+    try {
+      await deleteLineItem(lineItemId);
+      // After successfully removing the line item, update the cart state accordingly
+      setCart((prevCart) => ({
+        ...prevCart,
+        line_items: prevCart.line_items.filter(
+          (lineItem) => lineItem.lineitem_id !== lineItemId
+        ),
+      }));
+    } catch (error) {
+      console.log(error);
+    }
+  }
   // async function updateCart() {
   //   const updatedCart = await updateLineItem(lineItems.quantity);
   // }
@@ -37,17 +52,9 @@ export function Cart() {
               {lineItem.quantity} x {lineItem.product_name} x{" "}
               {lineItem.total_price}
               <button
-                value={quantity}
-                onClick={async (e) => {
-                  e.preventDefault();
-                  const updateCart = await updateLineItem(
-                    user.id,
-                    lineItem.quantity
-                  );
-                  setQuantity(updateCart);
-                }}
+                onClick={() => handleRemoveFromCart(lineItem.lineitem_id)}
               >
-                remove
+                Remove
               </button>
             </li>
           ))}
