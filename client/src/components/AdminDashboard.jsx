@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { createProduct } from "../api/products";
 import { useNavigate } from "react-router-dom";
+import "../components/components css/AdminDashboard.css";
 
 export function AdminDashboard() {
   const [name, setName] = useState("");
@@ -34,6 +35,7 @@ export function AdminDashboard() {
     <div className="admin-page">
       <h1>Create Product</h1>
       <form
+        className="create-product"
         onSubmit={(e) => {
           e.preventDefault(), handleSubmit();
         }}
