@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { Routes, Route, Link, useNavigate, NavLink } from "react-router-dom";
 import { ProductsList } from "../src/components/ProductsList";
 import { AuthForm } from "../src/components/AuthForm";
 import { ProductItem } from "../src/components/ProductItem";
@@ -41,6 +41,10 @@ function App() {
           {loggedIn && <Link to="/my-profile">My Profile</Link>}
           <Link to="/products">All Products</Link>
           {user.is_admin && <Link to="/create-product">Admin Dashboard</Link>}
+
+          <NavLink to="/my-cart/:id" className="nav-link">
+            <i className="material-icons">shopping_cart</i>
+          </NavLink>
         </div>
         {loggedIn && (
           <button className="button" onClick={handleLogout}>

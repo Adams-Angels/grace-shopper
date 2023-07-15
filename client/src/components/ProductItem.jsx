@@ -3,7 +3,7 @@ import { fetchProductById } from "../api/products";
 import { addLineItem } from "../api/lineItems";
 import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "./Auth/hooks/useAuth";
-import "../components/ProductItem.css";
+import "../components/components css/ProductItem.css";
 
 export function ProductItem() {
   const [singleProduct, setSingleProduct] = useState(null);
