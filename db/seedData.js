@@ -748,6 +748,52 @@ const products = [
     inventory: 53,
     category: "Clothing",
   },
+  {
+    name: "Watercolor frog painting",
+    description: "Pretty watercolor painting of a chubby green frog",
+    price: 28.99,
+    image:
+      "http://images.fineartamerica.com/images/artworkimages/mediumlarge/1/frog-christy-freeman.jpg",
+    inventory: 23,
+    category: "Artwork",
+  },
+  {
+    name: "Frog with snail painting",
+    description: "Painting of a frog with a snail on its head",
+    price: 34.99,
+    image:
+      "https://i.etsystatic.com/24577558/r/il/db9782/2665011220/il_fullxfull.2665011220_3sej.jpg",
+    inventory: 45,
+    category: "Artwork",
+  },
+  {
+    name: "Tree frog painting",
+    description:
+      "Watercolor painting of a red-eyed tree frog peeking around a corner",
+    price: 25.99,
+    image:
+      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.redd.it%2Fljoe6tnj0pjz.jpg&f=1&nofb=1&ipt=8fd1d2186b02fcf660c67a7bf3de9ca0b197dfdcba8ebcb4274b00f5faf40fdc&ipo=images",
+    inventory: 21,
+    category: "Artwork",
+  },
+  {
+    name: "Frog mug",
+    description: "Frog mug with flowers on its belly",
+    price: 17.99,
+    image:
+      "https://www.luvfrogs.com/wp-content/uploads/2015/08/cute-frog-mugs-e1440162471619.jpg",
+    inventory: 57,
+    category: "Home goods",
+  },
+  {
+    name: "Tree frog mug",
+    description: "Mug with frog climbing up a tree branch",
+    price: 18.99,
+    image:
+      "https://ae01.alicdn.com/kf/HTB1UWOlQVXXXXchXVXXq6xXFXXXL/1Piece-Creative-Frog-Ceramics-Coffee-Mug-12oz-Tree-Frog-Shaped-Handle-Mug-With-Foliage-Decal.jpg",
+    inventory: 27,
+    category: "Home goods",
+  },
 
   // please help!  :)  we need hundreds, I started with the ones we have images for
 ];
