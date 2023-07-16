@@ -43,7 +43,7 @@ export function AdminDashboard() {
 
   return (
     <div className="admin-page">
-      <h1>Create Product</h1>
+      <h1 className="create-product-admin">Create Product</h1>
       <form
         className="create-product"
         onSubmit={(e) => {
@@ -77,7 +77,7 @@ export function AdminDashboard() {
           }}
         />
 
-        <label>inventory</label>
+        <label>Inventory</label>
         <input
           type="number"
           value={inventory}
@@ -86,7 +86,7 @@ export function AdminDashboard() {
           }}
         />
 
-        <label>category</label>
+        <label>Category</label>
         <input
           type="text"
           value={category}
@@ -95,7 +95,7 @@ export function AdminDashboard() {
           }}
         />
 
-        <label>image </label>
+        <label>Image </label>
         <input
           type="url"
           value={image}
@@ -107,7 +107,7 @@ export function AdminDashboard() {
         <button type="submit">Create Product</button>
       </form>
       <div>
-        <h1>User information</h1>
+        <h1 className="user-information-admin">User information</h1>
         {users.length > 0 &&
           users.map((user) => {
             return (
