@@ -42,7 +42,7 @@ export function EditProduct() {
 
   return (
     <div className="admin-page">
-      <h1>Edit Product</h1>
+      <h1 className="edit-product">Edit Product</h1>
       <form
         className="create-product"
         onSubmit={(e) => {
