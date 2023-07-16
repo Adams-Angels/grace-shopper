@@ -53,15 +53,18 @@ export function ProductsList() {
   return (
     <div className="products-list">
       <h2>Products List</h2>
-      <input
-        type="text"
-        style={{ width: "95%", margin: "10px" }}
-        placeholder="search froggy products"
-        onChange={(e) => {
-          setSearchProducts(e.target.value.toLowerCase());
-          console.log(searchProducts);
-        }}
-      />
+      <label>
+        Search:
+        <input
+          type="text"
+          style={{ width: "50%", margin: "10px" }}
+          placeholder="search froggy products"
+          onChange={(e) => {
+            setSearchProducts(e.target.value.toLowerCase());
+            console.log(searchProducts);
+          }}
+        />
+      </label>
       <div className="product-grid">
         {console.log(products)}
         {products.length > 0 &&
