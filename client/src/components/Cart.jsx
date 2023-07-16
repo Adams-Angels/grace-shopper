@@ -7,9 +7,9 @@ import "../components/components css/Cart.css";
 
 export function Cart() {
   const [cart, setCart] = useState({});
-  const [lineItems, setLineItems] = useState();
+  const [lineItems, setLineItems] = useState([]);
   const [quantity, setQuantity] = useState();
-  const { user } = useAuth();
+  const { user } = useAuth() || null;
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -39,28 +39,25 @@ export function Cart() {
     }
   }
 
-  async function handleQuantityChange(lineItemId, newQuantity) {
+  async function handleQuantityChange(lineItemId, quantityDelta) {
     try {
-      await updateLineItem(lineItemId, newQuantity);
-      setCart((prevCart) => ({
-        ...prevCart,
-        line_items: prevCart.line_items.map((lineItem) => {
-          if (lineItem.lineitem_id === lineItemId) {
-            return {
-              ...lineItem,
-              quantity: newQuantity,
-            };
-          }
-          return lineItem;
-        }),
-      }));
+      const updatedLineItem = await updateLineItem(lineItemId, {
+        quantity: quantityDelta,
+      });
+      // Fetch the updated cart data
+      const updatedCart = await fetchCart();
+
+      // Update the cart and line items in the state
+      setCart(updatedCart);
+      setLineItems(updatedCart.line_items);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
   return (
     <div>
+      <h3>Welcome, {user.username}</h3>
       <h3>Cart</h3>
       {cart.line_items && cart.line_items.length > 0 ? (
         <ul>
@@ -110,6 +107,7 @@ export function Cart() {
         <p>Your cart is empty.</p>
       )}
       <button
+        className="cart-item-placeOrder-button"
         onClick={() => {
           navigate("/confirmation");
         }}
