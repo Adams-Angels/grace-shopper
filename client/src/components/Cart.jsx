@@ -61,7 +61,7 @@ export function Cart() {
     <div>
       <h3>Welcome, {user.username}</h3>
       <h3>Cart</h3>
-      {cart.line_items && cart.line_items.length > 0 ? (
+      {cart && cart.length > 0 ? (
         <ul>
           {cart.line_items.map((lineItem) => (
             <li className="cart-item" key={lineItem.lineitem_id}>
