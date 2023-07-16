@@ -23,9 +23,9 @@ server.use(express.static(path.join(__dirname, "./client", "dist")));
 server.use("/api", require("./routes"));
 
 // Sends the built React app for all other requests
-// server.use((req, res, next) => {
-//   res.sendFile(path.join(__dirname, "./client/dist", "index.html"));
-// });
+server.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, "./client/dist", "index.html"));
+});
 
 server.use((err, req, res, next) => {
   res.status(500);
