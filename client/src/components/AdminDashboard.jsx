@@ -73,7 +73,9 @@ export function AdminDashboard() {
           type="number"
           value={price}
           onChange={(e) => {
-            setPrice(e.target.value);
+            if (price > 0) {
+              setPrice(e.target.value);
+            }
           }}
         />
 
@@ -82,7 +84,9 @@ export function AdminDashboard() {
           type="number"
           value={inventory}
           onChange={(e) => {
-            setInventory(e.target.value);
+            if (inventory > 0) {
+              setInventory(e.target.value);
+            }
           }}
         />
 
