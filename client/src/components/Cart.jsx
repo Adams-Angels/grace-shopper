@@ -40,18 +40,20 @@ export function Cart() {
   }
 
   async function handleQuantityChange(lineItemId, quantityDelta) {
-    try {
-      const updatedLineItem = await updateLineItem(lineItemId, {
-        quantity: quantityDelta,
-      });
-      // Fetch the updated cart data
-      const updatedCart = await fetchCart();
+    if (quantityDelta > 0) {
+      try {
+        const updatedLineItem = await updateLineItem(lineItemId, {
+          quantity: quantityDelta,
+        });
+        // Fetch the updated cart data
+        const updatedCart = await fetchCart();
 
-      // Update the cart and line items in the state
-      setCart(updatedCart);
-      setLineItems(updatedCart.line_items);
-    } catch (error) {
-      console.error(error);
+        // Update the cart and line items in the state
+        setCart(updatedCart);
+        setLineItems(updatedCart.line_items);
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 
