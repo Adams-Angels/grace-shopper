@@ -4,6 +4,7 @@ ul {
 }
 
 .cart-item {
+  font-family: "Montserrat", sans-serif;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -54,6 +55,19 @@ ul {
 }
 
 .cart-item-placeOrder-button {
+  font-family: "Montserrat", sans-serif;
   color: white;
   background-color: #6ba368;
+}
+
+.cart-empty-message {
+  font-family: "Montserrat", sans-serif;
+}
+
+.welcome-message {
+  font-family: "Montserrat", sans-serif;
+}
+
+.cart {
+  font-family: "Montserrat", sans-serif;
 }
