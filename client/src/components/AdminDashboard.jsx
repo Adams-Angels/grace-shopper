@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { createProduct } from "../api/products";
 import { useNavigate } from "react-router-dom";
+import { getAllUsers } from "../api/auth";
 import "../components/components css/AdminDashboard.css";
 
 export function AdminDashboard() {
@@ -12,7 +13,16 @@ export function AdminDashboard() {
   const [category, setCategory] = useState("");
   const [product, setProduct] = useState("");
   const [error, setError] = useState("");
+  const [users, setUsers] = useState({});
   const navigate = useNavigate();
+  useEffect(() => {
+    async function getUsers() {
+      const allUsers = await getAllUsers();
+      setUsers(allUsers);
+    }
+    getUsers();
+  }, []);
+  console.log(users);
 
   async function handleSubmit() {
     try {
@@ -96,6 +106,9 @@ export function AdminDashboard() {
 
         <button type="submit">Create Product</button>
       </form>
+      <div>
+        <h1>User information</h1>
+      </div>
     </div>
   );
 }

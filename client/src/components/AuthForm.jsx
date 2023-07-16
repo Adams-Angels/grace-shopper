@@ -2,7 +2,7 @@ import { useState } from "react";
 import { registerUser, loginUser } from "../api/auth";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import useAuth from "../components/Auth/hooks/useAuth";
-import "../components/AuthForm.css";
+import "../components/components css/AuthForm.css";
 
 export function AuthForm() {
   const [username, setUsername] = useState("");
