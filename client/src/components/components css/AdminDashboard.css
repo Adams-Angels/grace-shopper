@@ -21,4 +21,7 @@
 
 .user-div {
   font-family: "Montserrat", sans-serif;
+  border-bottom: 1px solid green;
+  padding: 10px;
+  justify-content: space-between;
 }
