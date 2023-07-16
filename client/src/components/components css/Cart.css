@@ -37,3 +37,23 @@ ul {
 .cart-item-remove-button:hover {
   text-decoration: underline;
 }
+
+.quantity-button {
+  background-color: #6ba368;
+  color: #ffffff;
+  margin-left: 3px;
+  margin-right: 3px;
+  border: none;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.quantity-button:hover {
+  background-color: #bfe8bd;
+}
+
+.cart-item-placeOrder-button {
+  color: white;
+  background-color: #6ba368;
+}

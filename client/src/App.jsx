@@ -38,7 +38,7 @@ function App() {
         <div className="links">
           <Link to="/">Home</Link>
           <Link to="/login">Login</Link>
-          {loggedIn && <Link to="/my-profile">My Profile</Link>}
+          {/* {loggedIn && <Link to="/my-profile">My Profile</Link>} */}
           <Link to="/products">All Products</Link>
           {user.is_admin && <Link to="/create-product">Admin Dashboard</Link>}
           {loggedIn && (
@@ -66,7 +66,7 @@ function App() {
           <Route path="/edit-product/:id" element={<EditProduct />} />
         )}
         <Route path="/confirmation" element={<Confirmation />} />
-        <Route path="/my-profile" element={<MyProfile />} />
+        {/* <Route path="/my-profile" element={<MyProfile />} /> */}
         <Route path="/my-cart/:id" element={<Cart />} />
       </Routes>
       <footer>
