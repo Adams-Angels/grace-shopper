@@ -14,16 +14,18 @@ export function Cart() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function getCart() {
-      try {
-        const cart = await fetchCart();
-        setCart(cart);
-      } catch (error) {
-        console.log(error);
+    if (user) {
+      async function getCart() {
+        try {
+          const cart = await fetchCart();
+          setCart(cart);
+        } catch (error) {
+          console.log(error);
+        }
       }
+      getCart();
     }
-    getCart();
-  }, []);
+  }, [user]);
 
   async function handleRemoveFromCart(lineItemId) {
     try {
@@ -61,7 +63,8 @@ export function Cart() {
     <div>
       <h3>Welcome, {user.username}</h3>
       <h3>Cart</h3>
-      {cart.line_items && cart.line_items.length > 0 ? (
+
+      {cart && cart.line_items ? (
         <ul>
           {cart.line_items.map((lineItem) => (
             <li className="cart-item" key={lineItem.lineitem_id}>
