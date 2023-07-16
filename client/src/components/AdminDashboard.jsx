@@ -108,13 +108,13 @@ export function AdminDashboard() {
       </form>
       <div>
         <h1>User information</h1>
-        {users &&
+        {users.length > 0 &&
           users.map((user) => {
             return (
-              <div key={user.id}>
-                <h2>{user.username}</h2>
-                <p>{user.id}</p>
-                <p>{user.email}</p>
+              <div className="user-div" key={user.id}>
+                <h2 className="username">Username: {user.username}</h2>
+                <p className="id">Id: {user.id}</p>
+                <p className="email">Email: {user.email}</p>
               </div>
             );
           })}
