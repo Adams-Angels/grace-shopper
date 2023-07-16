@@ -33,7 +33,7 @@ ordersRouter.post("/create-order", async (req, res, next) => {
 ordersRouter.get("/cart", authRequired, async (req, res, next) => {
   try {
     const cart = await getCartByUserId(req.user.id);
-    console.log("cart from route", cart);
+
     res.send(cart);
   } catch (error) {
     next(error);

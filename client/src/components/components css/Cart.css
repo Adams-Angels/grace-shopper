@@ -71,3 +71,7 @@ ul {
 .cart {
   font-family: "Montserrat", sans-serif;
 }
+
+.cart-div {
+  min-height: 350px;
+}

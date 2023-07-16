@@ -8,7 +8,6 @@ const { createLineItem } = require("./adapters/lineItems");
 const { users, orders, products, lineItems } = require("./seedData");
 
 async function dropTables() {
-  console.log("Dropping tables...");
   try {
     await client.query(`
  
@@ -24,7 +23,6 @@ async function dropTables() {
 }
 
 async function createTables() {
-  console.log("Creating tables...");
   try {
     await client.query(`
     CREATE TABLE users(
@@ -64,7 +62,6 @@ async function createTables() {
 }
 
 async function populateTables() {
-  console.log("Populating tables...");
   try {
     await Promise.all([
       Promise.all(users.map(createUser)),
@@ -82,7 +79,6 @@ async function populateTables() {
         )
       ),
     ]);
-    console.log("...users, products, orders, and line items created");
   } catch (error) {
     console.error(error);
   }

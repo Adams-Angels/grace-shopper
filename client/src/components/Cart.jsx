@@ -60,7 +60,7 @@ export function Cart() {
   }
 
   return (
-    <div>
+    <div className="cart-div">
       <h3 className="welcome-message">Welcome, {user.username}</h3>
       <h3 className="cart">Cart</h3>
 
