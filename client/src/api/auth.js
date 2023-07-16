@@ -76,3 +76,12 @@ export async function logOut() {
     console.log(error);
   }
 }
+export async function getAllUsers() {
+  try {
+    const response = await fetch("/api/users/");
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
