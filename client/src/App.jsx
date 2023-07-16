@@ -21,6 +21,7 @@ function App() {
     e.preventDefault();
     await logOut();
     setLoggedIn(false);
+    localStorage.removeItem("token");
     window.location.href = "/";
   };
   return (
@@ -41,13 +42,13 @@ function App() {
           {/* {loggedIn && <Link to="/my-profile">My Profile</Link>} */}
           <Link to="/products">All Products</Link>
           {user.is_admin && <Link to="/create-product">Admin Dashboard</Link>}
-          {loggedIn && (
+          {user.id !== null && (
             <NavLink to="/my-cart/:id" className="nav-link">
               <i className="material-icons">shopping_cart</i>
             </NavLink>
           )}
         </div>
-        {loggedIn && (
+        {user.id !== null && (
           <button className="button" onClick={handleLogout}>
             Logout
           </button>
