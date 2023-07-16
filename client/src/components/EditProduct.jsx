@@ -70,22 +70,20 @@ export function EditProduct() {
         <label>Price: $</label>
         <input
           type="number"
+          min="0"
           value={price}
           onChange={(e) => {
-            if (price > 0) {
-              setPrice(e.target.value);
-            }
+            setPrice(e.target.value);
           }}
         />
 
         <label>inventory</label>
         <input
           type="number"
+          min="0"
           value={inventory}
           onChange={(e) => {
-            if (inventory > 0) {
-              setInventory(e.target.value);
-            }
+            setInventory(e.target.value);
           }}
         />
 
