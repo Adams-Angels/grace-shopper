@@ -61,8 +61,8 @@ export function Cart() {
 
   return (
     <div>
-      <h3>Welcome, {user.username}</h3>
-      <h3>Cart</h3>
+      <h3 className="welcome-message">Welcome, {user.username}</h3>
+      <h3 className="cart">Cart</h3>
 
       {cart && cart.line_items ? (
         <ul>
@@ -109,7 +109,7 @@ export function Cart() {
           ))}
         </ul>
       ) : (
-        <p>Your cart is empty.</p>
+        <p className="cart-empty-message">Your cart is empty.</p>
       )}
       <button
         className="cart-item-placeOrder-button"
