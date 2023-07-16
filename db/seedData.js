@@ -47,14 +47,7 @@ const products = [
     inventory: 5,
     category: "Figurines",
   },
-  {
-    name: "Sitting Frog Figurine",
-    description: "A large frog sitting frog style",
-    price: 15.99,
-    image: "https://marquiswatergardens.com/products/campania-frankie-frog",
-    inventory: 5,
-    category: "Figurines",
-  },
+
   {
     name: "Ballet Frog",
     description: "A small ballerina frog",
@@ -71,14 +64,7 @@ const products = [
     inventory: 3,
     category: "Artwork",
   },
-  {
-    name: "Bayou Frog",
-    description: "A frog painting down by the bayou",
-    price: 39.99,
-    image: "https://pixels.com/featured/frog-art-ian-mitchell.html",
-    inventory: 2,
-    category: "Artwork",
-  },
+
   {
     name: "Colorful Frog Painting",
     description: "Psychedelic frog art",
@@ -122,14 +108,7 @@ const products = [
     inventory: 10,
     category: "Clothing",
   },
-  {
-    name: "Frog Dress",
-    description: "Stylish frog-patterned dress",
-    price: 29.99,
-    image: "frog_dress.jpeg",
-    inventory: 6,
-    category: "Clothing",
-  },
+
   {
     name: "Kermit Frog Dress",
     description: "kermit the frog-themed gown",
@@ -139,14 +118,7 @@ const products = [
     inventory: 3,
     category: "Clothing",
   },
-  {
-    name: "Frog Jacket",
-    description: "Warm frog-printed jacket",
-    price: 79.99,
-    image: "frog_jacket.jpeg",
-    inventory: 5,
-    category: "Clothing",
-  },
+
   {
     name: "Frog Hoodie",
     description: "Cozy frog-themed hoodie",
@@ -244,15 +216,7 @@ const products = [
     inventory: 8,
     category: "Home Goods",
   },
-  {
-    name: "Ceramic Frog Bowl",
-    description: "Ceramic frog dish",
-    price: 14.99,
-    image:
-      "fhttps://www.fubiz.net2015/10/08/animal-handmade-ceramic-bowls-and-plates/handmadeplatesbowls1/",
-    inventory: 10,
-    category: "Home Goods",
-  },
+
   {
     name: "Frog Plate For Babies",
     description: "Frog-themed babay plate",
@@ -387,15 +351,7 @@ const products = [
     inventory: 12,
     category: "Accessories",
   },
-  {
-    name: "Frog Sponge Holder",
-    description: "Ceraminc frog that holds your dish sponge",
-    price: 12.99,
-    image:
-      "http://www.amazon.com/gp/product/B000I1UR7M/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B000I1UR7M&linkCode=as2&tag=luvfrogs-20",
-    inventory: 23,
-    category: "Home Goods",
-  },
+
   {
     name: "Frog Earrings",
     description: "Grumpy frog earrings",
@@ -675,15 +631,7 @@ const products = [
     inventory: 87,
     category: "Home Goods",
   },
-  {
-    name: "Frog Salt and Pepper Shakers",
-    description: "Salt and pepper shakers includes saucer with handle",
-    price: 18.99,
-    image:
-      "https://i.etsystatic.com/18270888/r/il/8a614c/2247082595/il_1588xN.2247082595_ts4t.jpg'",
-    inventory: 82,
-    category: "Home Goods",
-  },
+
   {
     name: "Frog and Mushroom Salt and Pepper Shakers",
     description: "Smiling frog holing a mushroom",
