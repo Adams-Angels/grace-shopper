@@ -34,7 +34,6 @@ export async function fetchLineItemsById(id) {
   try {
     const response = await fetch(`/api/lineitems/${id}`);
     const result = await response.json();
-    console.log("LineItems by id from api", result);
     return result;
   } catch (error) {
     console.error(error);
@@ -53,7 +52,7 @@ export async function updateLineItem(id, updatedLineItem) {
     if (response.ok) {
       const data = await response.json();
       //need to bring data.lineItem??
-      return data, console.log("data from updated line item: ", data);
+      return data;
     }
     throw error("Failed to update line item");
   } catch (error) {

@@ -22,8 +22,6 @@ export function AdminDashboard() {
     }
     getUsers();
   }, []);
-  console.log(users);
-
   async function handleSubmit() {
     try {
       const newProduct = await createProduct(

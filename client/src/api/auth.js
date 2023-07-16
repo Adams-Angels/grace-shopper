@@ -13,7 +13,6 @@ export async function registerUser(username, password, email, is_admin) {
       }),
     });
     const result = await response.json();
-    console.log("registration successful");
     return result;
   } catch (error) {
     console.log(error);
@@ -32,7 +31,6 @@ export async function loginUser(username, password) {
       }),
     });
     const result = await response.json();
-    console.log("logged in successful");
     return result;
   } catch (error) {
     console.log(error);
@@ -40,7 +38,6 @@ export async function loginUser(username, password) {
 }
 
 export async function fetchMe() {
-  console.log("hello from auth provider");
   try {
     const response = await fetch("/api/auth/me");
     const { success, message, user } = await response.json();
@@ -49,7 +46,7 @@ export async function fetchMe() {
         message,
       };
     }
-    console.log("fetch me user: ", user);
+
     return {
       success,
       message,

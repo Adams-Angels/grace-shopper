@@ -30,7 +30,7 @@ export function ProductsList() {
   async function handleDelete(productId) {
     try {
       const deleted = await deleteProduct(productId);
-      console.log(deleted);
+
       fetchProducts();
     } catch (error) {
       console.error(error);
@@ -48,7 +48,6 @@ export function ProductsList() {
       product.category.toLowerCase().includes(searchProducts)
     );
   });
-  console.log("filtered products", filteredProducts);
 
   return (
     <div className="products-list">
@@ -61,12 +60,10 @@ export function ProductsList() {
           placeholder="search froggy products"
           onChange={(e) => {
             setSearchProducts(e.target.value.toLowerCase());
-            console.log(searchProducts);
           }}
         />
       </label>
       <div className="product-grid">
-        {console.log(products)}
         {products.length > 0 &&
           !searchProducts &&
           products.map((product) => {

@@ -1,7 +1,6 @@
 const client = require("../client");
 
 async function createOrders(user_id, is_cart) {
-  console.log("starting to create order");
   try {
     const {
       rows: [order],
@@ -12,7 +11,7 @@ async function createOrders(user_id, is_cart) {
         `,
       [user_id, is_cart]
     );
-    console.log("order from db:", order);
+
     return order;
   } catch (error) {
     throw error;
@@ -22,7 +21,6 @@ async function createOrders(user_id, is_cart) {
 // if we get error on front end - revisit this function
 async function getOrderById(id) {
   try {
-    console.log("get order by id");
     const row = await client.query(
       `
     SELECT * FROM orders 
@@ -30,7 +28,7 @@ async function getOrderById(id) {
     `,
       [id]
     );
-    console.log("order id:,");
+
     return row.rows;
   } catch (error) {
     throw error;
@@ -76,7 +74,6 @@ where orders.user_id = $1 and orders.is_cart = true`,
 }
 async function getAllOrders() {
   try {
-    console.log("getting all orders");
     const { rows } = await client.query(`
         SELECT * FROM orders; 
         `);
@@ -88,7 +85,6 @@ async function getAllOrders() {
 
 async function updateOrders(user_id, is_cart) {
   try {
-    console.log("updating order");
     const {
       rows: [order],
     } = await client.query(

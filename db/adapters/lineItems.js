@@ -3,7 +3,6 @@ const { getProductById } = require("./products");
 
 async function createLineItem(quantity, order_id, product_id) {
   try {
-    console.log("Starting to create LineItems");
     // Check if the product exists
     const product = await getProductById(product_id);
     if (!product) {
@@ -19,7 +18,7 @@ async function createLineItem(quantity, order_id, product_id) {
       `,
       [quantity, order_id, product_id]
     );
-    console.log("Created LineItem:", createdLineItem);
+
     return createdLineItem;
   } catch (error) {
     throw error;
@@ -28,7 +27,6 @@ async function createLineItem(quantity, order_id, product_id) {
 
 async function getLineItemById(id) {
   try {
-    console.log("getting lineItems by id");
     const {
       rows: [lineItem],
     } = await client.query(
@@ -66,7 +64,7 @@ async function getLineItemById(id) {
       `,
       [id]
     );
-    console.log("LineItem:", lineItem);
+
     return lineItem;
   } catch (error) {
     throw error;
@@ -75,7 +73,6 @@ async function getLineItemById(id) {
 
 async function getAllLineItems() {
   try {
-    console.log("getting all lineItems");
     const { rows } = await client.query(`
     SELECT 
 	
@@ -108,7 +105,7 @@ async function getAllLineItems() {
   FROM orders
       ;
     `);
-    console.log("All lineItems:", rows);
+
     return rows;
   } catch (error) {
     throw error;
@@ -128,7 +125,7 @@ async function updateLineItem(id, { quantity }) {
       `,
       [id, quantity]
     );
-    console.log("Updated lineItem:", updatedlineItem);
+
     return updatedlineItem;
   } catch (error) {
     throw error;
@@ -145,7 +142,7 @@ async function destroyLineItem(id) {
       `,
       [id]
     );
-    console.log("Destroyed lineItems:", rows);
+
     return rows;
   } catch (error) {
     throw error;

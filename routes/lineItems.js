@@ -24,7 +24,7 @@ lineItemRouter.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const lineItem = await getLineItemById(id);
-    console.log("Retrieved Line Item:", lineItem);
+
     res.send(lineItem);
   } catch (error) {
     next(error);
@@ -68,19 +68,17 @@ async function updateOrCreateLineItem(orderId, productId) {
     `SELECT * FROM lineitems WHERE order_id = $1 AND product_id = $2`,
     [orderId, productId]
   );
-  console.log("line item", foundLineItem);
+
   if (foundLineItem) {
     // Update the quantity of the existing line item
     const updatedLineItem = {
       ...foundLineItem,
       quantity: foundLineItem.quantity + 1,
     };
-    console.log("updated lineitem", updatedLineItem);
+
     return await updateLineItem(foundLineItem.id, updatedLineItem);
   }
   // Create a new line item
-
-  console.log("starting to create lineitem");
 
   let {
     rows: [createdLineItem],
@@ -90,7 +88,7 @@ async function updateOrCreateLineItem(orderId, productId) {
           RETURNING *`,
     [1, orderId, productId]
   );
-  console.log("new line item", createdLineItem);
+
   return createdLineItem;
 }
 
@@ -99,8 +97,7 @@ lineItemRouter.post("/", authRequired, async (req, res, next) => {
     const { product_id } = req.body;
     const currCart = await findOrCreateCartForUser(req.user.id);
     const currLineItem = await updateOrCreateLineItem(currCart.id, product_id);
-    console.log("Current Cart: ", currCart);
-    console.log("Current Line Item", currLineItem);
+
     // find lineitems if it exists update qty
 
     res.send(currLineItem);

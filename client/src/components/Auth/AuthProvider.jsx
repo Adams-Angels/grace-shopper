@@ -5,14 +5,12 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({ id: null, username: "Guest" });
   const [loggedIn, setLoggedIn] = useState(false);
-  console.log("authprovider mounted");
 
   useEffect(() => {
-    console.log("useEffect triggered");
     async function getMe() {
       try {
         const { success, message, user } = await fetchMe();
-        console.log("User in Use Effect: ", user);
+
         setUser(user);
       } catch (error) {
         setLoggedIn(false);

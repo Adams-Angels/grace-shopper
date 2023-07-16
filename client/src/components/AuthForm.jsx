@@ -25,7 +25,6 @@ export function AuthForm() {
       if (result.success) {
         setLoggedIn(true);
         navigate("/");
-        console.log("You're logged in auth form");
       } else {
         setError(result.error);
       }
