@@ -25,3 +25,8 @@
   padding: 10px;
   justify-content: space-between;
 }
+
+.create-product-admin,
+.user-information-admin {
+  font-family: "Montserrat", sans-serif;
+}
